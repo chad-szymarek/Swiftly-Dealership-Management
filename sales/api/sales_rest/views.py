@@ -31,30 +31,32 @@ class CustomerListEnconder(ModelEncoder):
 class SalesListEncoder(ModelEncoder):
     model = Sale
     properties = [
-        'name',
-        'address',
-        'phone_number',
-        'id',
+        "automobile",
+        "sales_person",
+        "customer",
+        "sale_price",
+
     ]
 
     encoders = {
-        "automobile": AutomobileVO(),
-        "salesperson": SalesPersonListEnconder(),
+        "automobile": AutomobileVOEncoder(),
+        "sales_person": SalesPersonListEnconder(),
         "customer": CustomerListEnconder(),
     }
 
 
 class SalesDetailEncoder(ModelEncoder):
-    model = Customer
+    model = Sale
     properties = [
-        'sales_person',
-        'sale_price',
-        'customer',
-        'automobile',
+        "automobile",
+        "sales_person",
+        "customer",
+        "sale_price",
+
     ]        
     encoders = {
-        "automobile": AutomobileVO(),
-        "salesperson": SalesPersonListEnconder(),
+        "automobile": AutomobileVOEncoder(),
+        "sales_person": SalesPersonListEnconder(),
         "customer": CustomerListEnconder(),
     }
     
@@ -109,12 +111,10 @@ def list_customer(request):
 
 
 @require_http_methods(["GET", "POST"])
-def list_sales(request, automobile_vo_id=None):    
-    if request.method == "GET":
-        if automobile_vo_id is not None:
-            sales = Sale.objects.filter(vehicle=automobile_vo_id)
-        else:
+def list_sales(request):    
+    if request.method == "GET": 
             sales = Sale.objects.all()
+            print("what sales", sales)
             return JsonResponse(
                 {"sales": sales},
                 encoder=SalesListEncoder,
