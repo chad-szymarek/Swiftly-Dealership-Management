@@ -1,15 +1,8 @@
 from django.db import models
 
-class VehicleVO(models.Model):
-    name = models.CharField(max_length=100)
-
 class AutomobileVO(models.Model):
-    color = models.CharField(max_length=100)
-    year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17, unique=True)
-    model = models.CharField(max_length=100)
-    manufacturer = models.CharField(max_length=50)
-    import_href = models.CharField(max_length=300, unique=True)    
+    import_href = models.CharField(max_length=300, unique=True)
 
     def __str__(self):
         return self.vin 
@@ -17,7 +10,10 @@ class AutomobileVO(models.Model):
 
 class Salesperson(models.Model):
     name = models.CharField(max_length=200)
-    employee_number = models.PositiveSmallIntegerField(unique=True)
+    employee_number = models.PositiveIntegerField(unique=True)
+
+    def __str__(self):
+        return self.name
 
  
 class Customer(models.Model):
@@ -33,23 +29,23 @@ class Customer(models.Model):
 class Sale(models.Model):               
     sales_person = models.ForeignKey(
         Salesperson,
-        related_name="sales_person",
+        related_name="sale",
         on_delete=models.PROTECT,
     )
 
     automobile = models.ForeignKey(
         AutomobileVO,
-        related_name="automobile",
+        related_name="sale",
         on_delete=models.PROTECT,
     )
 
     customer = models.ForeignKey(
         Customer,
-        related_name="customer",
+        related_name="sale",
         on_delete=models.PROTECT,
     )
     
-    sale_price = models.IntegerField()
+    sale_price = models.PositiveIntegerField()
 
     def __str__(self):
         return f'{self.sales_person}, {self.automobile}'

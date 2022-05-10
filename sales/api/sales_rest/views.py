@@ -1,53 +1,21 @@
-from site import venv
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
+from common.json import ModelEncoder
+from .models import AutomobileVO, Customer, Salesperson, Sale
 import json
 
-from common.json import ModelEncoder
-from .models import AutomobileVO, Customer, Salesperson, VehicleVO, Sale
-
-class VehicleVO(ModelEncoder):    
-    model = VehicleVO
-    properties = ['name']
-
-class AutomobileVO(ModelEncoder):
+class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
-    properties = ['vin']
-        
-    encoders = {
-        "vehicle": VehicleVO(),
-    }
+    properties = ['vin', 'import_href']
 
-class SalesListEncoder(ModelEncoder):
-    model = Sale
-    properties = [
-        'name',
-        'address',
-        'phone_number',
-        'id',
-    ]
-
-    def get_extra_data(self, o):
-        return {"VehicleModel": o.vehiclemodel.name}
-
-class SalesDetailEncoder(ModelEncoder):
-    model = Customer
-    properties = [
-        'sales_person',
-        'sale_price',
-        'customer',
-        'automobile',
-    ]        
-    encoders = {
-        "vehicle": AutomobileVO(),
-    }
 
 class SalesPersonListEnconder(ModelEncoder):
     model = Salesperson
     properties = [
         'name',
         'employee_number',
+        'id',
     ]
 
 class CustomerListEnconder(ModelEncoder):
@@ -59,6 +27,36 @@ class CustomerListEnconder(ModelEncoder):
         'id',
     ]
 
+
+class SalesListEncoder(ModelEncoder):
+    model = Sale
+    properties = [
+        'name',
+        'address',
+        'phone_number',
+        'id',
+    ]
+
+    encoders = {
+        "automobile": AutomobileVO(),
+        "salesperson": SalesPersonListEnconder(),
+        "customer": CustomerListEnconder(),
+    }
+
+
+class SalesDetailEncoder(ModelEncoder):
+    model = Customer
+    properties = [
+        'sales_person',
+        'sale_price',
+        'customer',
+        'automobile',
+    ]        
+    encoders = {
+        "automobile": AutomobileVO(),
+        "salesperson": SalesPersonListEnconder(),
+        "customer": CustomerListEnconder(),
+    }
     
 
 
@@ -117,26 +115,31 @@ def list_sales(request, automobile_vo_id=None):
             sales = Sale.objects.filter(vehicle=automobile_vo_id)
         else:
             sales = Sale.objects.all()
-        return JsonResponse(
-            {"sales": sales},
-            encoder=SalesListEncoder,
+            return JsonResponse(
+                {"sales": sales},
+                encoder=SalesListEncoder,
         )
     else:
         content = json.loads(request.body)                       
+        try:
+            auto_href = content['automobile']
+            auto = AutomobileVO.objects.get(import_href=auto_href)
+            content['automobile'] = auto
+        except AutomobileVO.DoesNotExist:
+            sales = Sale.objects.create(**content)
+            return JsonResponse(
+                sales,
+                encoder=SalesDetailEncoder,
+                safe=False,
+            )   
 
-        sales = Sale.objects.create(**content)
-        return JsonResponse(
-            sales,
-            encoder=SalesDetailEncoder,
-            safe=False,
-        )
 
 
 @require_http_methods(["DELETE", "GET", "PUT"])
 def show_sale(request, pk):
     if request.method == "GET":
         try:        
-            sales = sale.objects.get(id=pk)
+            sales = Sale.objects.get(id=pk)
             return JsonResponse(
                 sales,
                 encoder=SalesDetailEncoder,
@@ -148,7 +151,7 @@ def show_sale(request, pk):
                 status=400,
             )
     elif request.method == "DELETE":
-        count, _ = sale.objects.filter(id=pk).delete()
+        count, _ = Sale.objects.filter(id=pk).delete()
         return JsonResponse({"deleted": count > 0})
     else:
         content = json.loads(request.body)
