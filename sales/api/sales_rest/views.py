@@ -1,14 +1,23 @@
+from site import venv
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
 
 from common.json import ModelEncoder
-from .models import VehicleModelVO, Sale, Customer
+from .models import AutomobileVO, Salesperson, VehicleVO, Sale, Customer
 
-class VehicleModelVOEncoder(ModelEncoder):
-    model = VehicleModelVO
-    properties = ['name', 'import_href']
+class VehicleVO(ModelEncoder):    
+    model = VehicleVO
+    properties = ['name']
+
+class AutomobileVO(ModelEncoder):
+    model = AutomobileVO
+    properties = ['vin']
+        
+    encoders = {
+        "vehicle": VehicleVO(),
+    }
 
 class SalesListEncoder(ModelEncoder):
     model = Sale
@@ -18,6 +27,7 @@ class SalesListEncoder(ModelEncoder):
         'phone_number',
         'id',
     ]
+
     def get_extra_data(self, o):
         return {"VehicleModel": o.vehiclemodel.name}
 
@@ -28,9 +38,37 @@ class SalesDetailEncoder(ModelEncoder):
         'sale_price',
         'customer',
         'automobile',
+    ]        
+    encoders = {
+        "vehicle": AutomobileVO(),
+    }
+
+class SalesPersonListEnconder(ModelEncoder):
+    model = Salesperson
+    properties = [
+        'name',
+        'employee_number',
     ]
-    def get_extra_data(self, o):
-        return {"VehicleModel": o.sale.automobile.model}
+
+
+@require_http_methods(["GET", "POST"])
+def list_salesperson(request):    
+    if request.method == "GET":
+        salesperson = Salesperson.objects.all()
+        return JsonResponse(
+            {"Salesperson": salesperson},
+            encoder=SalesPersonListEnconder,
+        )
+    else:
+        content = json.loads(request.body)
+        salesperson = Salesperson.objects.create(**content)
+        return JsonResponse(
+            salesperson,
+            encoder=SalesPersonListEnconder,
+            safe=False
+        )
+
+
 
 
 
@@ -38,10 +76,10 @@ class SalesDetailEncoder(ModelEncoder):
 
 
 @require_http_methods(["GET", "POST"])
-def list_sales(request, vehiclemodel_vo_id=None):    
+def list_sales(request, automobile_vo_id=None):    
     if request.method == "GET":
-        if vehiclemodel_vo_id is not None:
-            sales = Sale.objects.filter(vehicle=vehiclemodel_vo_id)
+        if automobile_vo_id is not None:
+            sales = Sale.objects.filter(vehicle=automobile_vo_id)
         else:
             sales = Sale.objects.all()
         return JsonResponse(
@@ -52,10 +90,10 @@ def list_sales(request, vehiclemodel_vo_id=None):
         content = json.loads(request.body)
        
         try:
-            vehicle_href = content["vhicle"]
-            vehicle = VehicleModelVO.objects.get(vehicle_number=vehicle_href)
-            content["vehicle"] = vehicle
-        except VehicleModelVO.DoesNotExist:
+            auto_href = content["auto"]
+            auto = AutomobileVO.objects.get(auto_number=auto_href)
+            content["auto"] = auto
+        except AutomobileVO.DoesNotExist:
             return JsonResponse(
                 {"message": "Invalid Vehicle id"},
                 status=400,
