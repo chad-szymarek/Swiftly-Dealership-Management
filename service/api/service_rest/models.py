@@ -5,7 +5,7 @@ from django.urls import reverse
 
 class Technician(models.Model):
     name = models.CharField(max_length=300)
-    employee_number = models.PositiveBigIntegerField()
+    employee_number = models.PositiveIntegerField(null=True, unique=True)
 
     def __str__(self):
         return self.name

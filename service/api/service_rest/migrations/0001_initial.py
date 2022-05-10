@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
             name='Appointment',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('owner', models.CharField(max_length=200)),
+                ('customer_name', models.CharField(max_length=200)),
                 ('vin', models.CharField(max_length=300)),
                 ('date_time', models.DateTimeField()),
                 ('reason', models.TextField()),
