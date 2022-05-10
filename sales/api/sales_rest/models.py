@@ -4,8 +4,12 @@ class VehicleVO(models.Model):
     name = models.CharField(max_length=100)
 
 class AutomobileVO(models.Model):
+    color = models.CharField(max_length=100)
+    year = models.PositiveSmallIntegerField()
     vin = models.CharField(max_length=17, unique=True)
-    import_href = models.CharField(max_length=300, unique=True)   
+    model = models.CharField(max_length=100)
+    manufacturer = models.CharField(max_length=50)
+    import_href = models.CharField(max_length=300, unique=True)    
 
     def __str__(self):
         return self.vin 
@@ -19,12 +23,8 @@ class Salesperson(models.Model):
 class Customer(models.Model):
     name = models.CharField(max_length=150)
     address = models.CharField(max_length=300)
-    phone_number = models.CharField(max_length=20)
-    salesperson = models.ForeignKey(
-        Salesperson,
-        related_name="salesperson",
-        on_delete=models.PROTECT,
-    )
+    phone_number = models.CharField(max_length=20, unique=True)
+  
 
     def __str__(self):
         return self.name

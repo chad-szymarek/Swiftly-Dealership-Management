@@ -5,7 +5,7 @@ from django.views.decorators.http import require_http_methods
 import json
 
 from common.json import ModelEncoder
-from .models import AutomobileVO, Salesperson, VehicleVO, Sale, Customer
+from .models import AutomobileVO, Customer, Salesperson, VehicleVO, Sale
 
 class VehicleVO(ModelEncoder):    
     model = VehicleVO
@@ -50,6 +50,17 @@ class SalesPersonListEnconder(ModelEncoder):
         'employee_number',
     ]
 
+class CustomerListEnconder(ModelEncoder):
+    model = Customer
+    properties = [
+        'name',
+        'address',
+        'phone_number',
+        'id',
+    ]
+
+    
+
 
 @require_http_methods(["GET", "POST"])
 def list_salesperson(request):    
@@ -61,16 +72,40 @@ def list_salesperson(request):
         )
     else:
         content = json.loads(request.body)
-        salesperson = Salesperson.objects.create(**content)
+        try:
+            salesperson = Salesperson.objects.create(**content)
+            return JsonResponse(
+                salesperson,
+                encoder=SalesPersonListEnconder,
+                safe=False
+            )
+        except:
+            return JsonResponse(
+                {"message": "Use another employee number."}
+            )
+
+
+@require_http_methods(["GET", "POST"])
+def list_customer(request):    
+    if request.method == "GET":
+        customer = Customer.objects.all()
         return JsonResponse(
-            salesperson,
-            encoder=SalesPersonListEnconder,
-            safe=False
+            {"customer": customer},
+            encoder=CustomerListEnconder,
         )
-
-
-
-
+    else:
+        content = json.loads(request.body)
+        try:
+            customer = Customer.objects.create(**content)
+            return JsonResponse(
+                Customer,
+                encoder=CustomerListEnconder,
+                safe=False
+            )
+        except:
+            return JsonResponse(
+                {"message": "Use another customer."}
+            )
 
 
 
@@ -87,17 +122,7 @@ def list_sales(request, automobile_vo_id=None):
             encoder=SalesListEncoder,
         )
     else:
-        content = json.loads(request.body)
-       
-        try:
-            auto_href = content["auto"]
-            auto = AutomobileVO.objects.get(auto_number=auto_href)
-            content["auto"] = auto
-        except AutomobileVO.DoesNotExist:
-            return JsonResponse(
-                {"message": "Invalid Vehicle id"},
-                status=400,
-            )
+        content = json.loads(request.body)                       
 
         sales = Sale.objects.create(**content)
         return JsonResponse(
