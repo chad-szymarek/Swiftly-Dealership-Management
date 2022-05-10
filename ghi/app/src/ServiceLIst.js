@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 function ServiceList({ appointments }) {
 
@@ -18,6 +18,7 @@ function ServiceList({ appointments }) {
                 <thead>
                     <tr>
                         <th>Customer</th>
+                        <th>Vip</th>
                         <th>Vin</th>
                         <th>Technician</th>
                         <th>Reason</th>
@@ -28,6 +29,7 @@ function ServiceList({ appointments }) {
                         return (
                             <tr key={appointment.id}>
                                 <td>{appointment.customer_name}</td>
+                                <td>{appointment.vip}</td>
                                 <td>{appointment.vin}</td>
                                 <td>{appointment.technician.employee_number}</td>
                                 <td>{appointment.reason}</td>

@@ -3,10 +3,14 @@ from django.http import JsonResponse
 import json
 from django.views.decorators.http import require_http_methods
 
-from .models import Technician, Appointment
+from .models import AutomobileVO, Technician, Appointment
 from common.json import ModelEncoder
 
 # Create your views here.
+
+class AutomobileVOEncoder(ModelEncoder):
+    model = AutomobileVO
+    properties = ["import_href", "vin"]
 
 class TechnicianListEncoder(ModelEncoder):
     model = Technician
@@ -14,14 +18,14 @@ class TechnicianListEncoder(ModelEncoder):
 
 class AppointmentListEncoder(ModelEncoder):
     model = Appointment
-    properties = ["id", "customer_name", "vin", "technician", "reason", "date", "time"]
+    properties = ["id", "customer_name", "vip","vin", "technician", "reason", "date", "time"]
     encoders = {
         "technician": TechnicianListEncoder()
     }
 
 class AppointmentDetailEncoder(ModelEncoder):
     model = Appointment
-    properties = ["customer_name", "vin", "sold_vin", "technician", "reason", "date"]
+    properties = ["customer_name", "vip", "vin", "technician", "reason", "date"]
     encoders = {
         "technician": TechnicianListEncoder()
     }
@@ -64,6 +68,13 @@ def api_list_appointments(request):
 
         technician = Technician.objects.get(id=content["technician"])
         content["technician"] = technician
+
+        try:
+            vin = AutomobileVO.objects.get(vin=content["vin"])
+            content["vip"] = True
+        except AutomobileVO.DoesNotExist:
+            content["vip"] = False
+
         appointment = Appointment.objects.create(**content)
 
         return JsonResponse(

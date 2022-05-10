@@ -4,6 +4,7 @@ import MainPage from './MainPage';
 import Nav from './Nav';
 import ServiceList from './ServiceLIst';
 import TechnicianForm from './TechnicianForm';
+import ServiceForm from './ServiceForm';
 
 function App() {
   const [currentAppointments, setCurrentAppointments] = useState([]);
@@ -34,6 +35,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="services">
             <Route index element={<ServiceList appointments={currentAppointments} />} />
+            <Route path="create/" element={<ServiceForm appointments={currentAppointments} technicians={currentTechnicians} />} />
           </Route>
           <Route path="technicians">
             <Route index element={<TechnicianForm technicians={currentTechnicians} />} />
