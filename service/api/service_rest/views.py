@@ -21,7 +21,7 @@ class AppointmentListEncoder(ModelEncoder):
 
 class AppointmentDetailEncoder(ModelEncoder):
     model = Appointment
-    properties = ["customer_name", "vin", "technician", "reason", "date"]
+    properties = ["customer_name", "vin", "sold_vin", "technician", "reason", "date"]
     encoders = {
         "technician": TechnicianListEncoder()
     }
@@ -37,13 +37,18 @@ def api_list_technicians(request):
         )
     else:
         content = json.loads(request.body)
-        technician = Technician.objects.create(**content)
-        print(content)
-        return JsonResponse(
-            technician,
-            encoder=TechnicianListEncoder,
-            safe=False,
-        )
+        try:
+            technician = Technician.objects.create(**content)
+            print(content)
+            return JsonResponse(
+                technician,
+                encoder=TechnicianListEncoder,
+                safe=False,
+            )
+        except:
+            return JsonResponse(
+                {"message": "Use another technician"}
+            )
 
 @require_http_methods(["GET", "POST"])
 def api_list_appointments(request):

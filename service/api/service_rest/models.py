@@ -16,6 +16,7 @@ class Technician(models.Model):
 class Appointment(models.Model):
     customer_name = models.CharField(max_length=200)
     vin = models.CharField(max_length=300)
+    sold_vin = models.ForeignKey("AutomobileVO", related_name="+", on_delete=models.CASCADE, null=True, blank=True)
     date = models.DateField(null=True)
     time = models.TimeField(null=True)
     technician = models.ForeignKey("Technician", related_name="appointments", on_delete=models.PROTECT)
