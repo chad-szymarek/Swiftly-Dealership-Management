@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 
-function ServiceList() {
-    const [currentAppointments, setCurrentAppointments] = useState([]);
+function ServiceList({ appointments }) {
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const response = await fetch('http://localhost:8080/api/appointments/');
-            const data = await response.json()
-            setCurrentAppointments(data.appointments);
-        }
-        fetchData()
-    }, []);
-    console.log(typeof(currentAppointments))
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const response = await fetch('http://localhost:8080/api/appointments/');
+    //         const data = await response.json()
+    //         setCurrentAppointments(data.appointments);
+    //     }
+    //     fetchData()
+    // }, []);
+    // console.log(typeof(currentAppointments))
 
     return(
         <>
@@ -25,7 +24,7 @@ function ServiceList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {currentAppointments.map(appointment => {
+                    {appointments.map(appointment => {
                         return (
                             <tr key={appointment.id}>
                                 <td>{appointment.customer_name}</td>
