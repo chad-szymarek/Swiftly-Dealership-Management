@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function salesPersonList(props) {
+function salesPersonHistory(props) {
 //   const deleteSale = async (href) => {
 //     fetch(`http://localhost:8090${href}`, {
 //       method: 'DELETE',
@@ -24,7 +24,7 @@ function salesPersonList(props) {
           </tr>
         </thead>
         <tbody>
-          {props.salesperson.map(salesperson => {
+          {props.salesPerson.map(salesperson => {
             console.log(salesperson)
             return (
               <tr key={salesperson.href}>  
@@ -41,5 +41,5 @@ function salesPersonList(props) {
     );
   }
   
-  export default salesPersonList;
+  export default salesPersonHistory;
   

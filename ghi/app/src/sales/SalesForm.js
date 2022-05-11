@@ -2,13 +2,15 @@ import React from 'react';
 
 class SalesForm extends React.Component {
     constructor(props) {        
-        super(props);
-        console.log("print something: ", props)
-        this.state = {
-            salesPerson: '',
+        super(props);        
+        this.state = {            
             automobile: '',
-            customer: '',
+            salesPerson: '',
+            customer: '',            
             price: '',
+            salesPersons: [],
+            autos: [],
+            customers: [],           
         }
 
     this.handleChange = this.handleChange.bind(this);
@@ -24,26 +26,27 @@ class SalesForm extends React.Component {
         const customerResponse = await fetch(customerUrl);
         const autoResponse = await fetch(autoUrl);
 
-        if (salesResponse.ok && customerResponse.ok && autoResponse.ok) {
+        if (autoResponse.ok && customerResponse.ok && autoResponse.ok) {
             const saleData = await salesResponse.json();
             const customerData = await customerResponse.json();
             const autoData = await autoResponse.json();
-            console.log("what the sales: ", saleData)
             this.setState({ 
-                salespersons: saleData.salespersons,
+                salesPersons: saleData.salespersons,
                 customers: customerData.customers,
-                automobiles: autoData.automobiles
+                autos: autoData.autos
              })
         }
     }  
-
-
+  
+ 
     async handleSubmit(event) {
         event.preventDefault();
         const data = {...this.state};
-        data.sales_person = data.salesPerson;
+        data.sales_person = data.salesPerson;        
+        delete data.salesPersons;
+        delete data.salesPerson;
         delete data.customers;               
-        delete data.automobiles;               
+        delete data.autos;               
         console.log(data)
     
         const salesHistoryUrl = 'http://localhost:8090/api/sales/';
@@ -74,61 +77,63 @@ class SalesForm extends React.Component {
         this.setState(newState);
     }
 
-    render() {
-        return (
-            <div className="row">
+        render() {
+            return (
+              <div className="row">
                 <div className="offset-3 col-6">
-                    <div className="shadow p-4 mt-4">
-                        <h1>Add a Customer</h1>
-                        <form onSubmit={this.handleSubmit} id="create-saleshistory-form">
-                            <div className="mb-3">
-                                <select onChange={this.handleChange} value={this.state.salesPerson} placeholder="Salesperson" required id="salesPerson" name="salesPerson" className="form-select">
-                                <option value="">Choose a Salesperson</option>                                
-                                {this.state.salespersons.map(salesperson => {
-                                    return (
-                                        <option key={salesperson.id} value={salesperson.id}>
-                                        {salesperson.name}
-                                        </option>
-                                     );
-                                })}
-                                </select>
-                            </div>
-                            <div className="mb-3">
-                                <select onChange={this.handleChange} value={this.state.customer} placeholder="Customer" required id="customer" name="customer" className="form-select">
-                                <option value="">Choose a Customer</option>                                
-                                {this.state.customers.map(customer => {
-                                    return (
-                                        <option key={customer.id} value={customer.id}>
-                                        {customer.name}
-                                        </option>
-                                     );
-                                })}
-                                </select>
-                            </div>
-                            <div className="mb-3">
-                                <select onChange={this.handleChange} value={this.state.automobile} placeholder="Automobile" required id="automobile" name="automobile" className="form-select">
-                                <option value="">Choose an Automobile</option>                                
-                                {this.state.automobiles.map(automobile => {
-                                    return (
-                                        <option key={automobile.id} value={automobile.id}>
-                                        {automobile.vin}
-                                        </option>
-                                     );
-                                })}
-                                </select>
-                            </div>
-                            <div className="form-floating mb-3">
-                                <input onChange={this.handleChange} value={this.state.price} placeholder="Price" required type="text" name="price" id="price" className="form-control" />
-                                <label htmlFor="price">Price</label>
-                            </div> 
-                            <button className="btn btn-primary">Create</button>
-                        </form>
-                   </div>
+                  <div className="shadow p-4 mt-4">
+                    <h1>Record a new sale</h1>
+                    <form onSubmit={this.handleSubmit} id="create-sales-form">
+                    <div className="mb-3">
+                        <select onChange={this.handleChange} value={this.state.automobile} required name="automobile" id="automobile" className="form-select">
+                          <option value="">Choose an automobile</option>
+                          {this.state.autos.map(auto => {
+                            return (
+                              <option key={auto.href} value={auto.vin}>
+                                  {auto.year} {auto.color} {auto.model.manufacturer.name} {auto.model.name}
+                              </option>
+                            )
+                          })}
+                        </select>
+                      </div>
+                      <div className="mb-3">
+                        <select onChange={this.handleChange} value={this.state.salesPerson} required name="salesPerson" id="salesPerson" className="form-select">
+                          <option value="">Choose a sales person</option>
+                          {this.state.salesPersons.map(salesperson => {
+                            return (
+                              <option key={salesperson.name} value={salesperson.name}>{salesperson.name}</option>
+                            )
+                          })}
+                        </select>
+                      </div>
+                      <div className="mb-3">
+                        <select onChange={this.handleChange} value={this.state.customer} required name="customer" id="customer" className="form-select">
+                          <option value="">Choose a customer</option>
+                          
+                          {this.state.customers.map(customer => {                              
+                            return (
+                              <option key={customer.id} value={customer.name}>
+                                  {customer.name}
+                              </option>
+                            )
+                          })}
+                        </select>
+                      </div>
+                      <div className="form-floating mb-3">
+                          <input onChange={this.handleChange} value={this.state.price} placeholder="Sale price" required type="number" name="price" id="price" className="form-control" />
+                          <label htmlFor="price">Sale price</label>
+                      </div>
+                      <button className="btn btn-primary">Create</button>
+                    </form>
+                  </div>
                 </div>
-            </div>
-        )
-    }
-}
+              </div>
+            );
+          }
+        }
+        
+        
+
   
 
 export default SalesForm;

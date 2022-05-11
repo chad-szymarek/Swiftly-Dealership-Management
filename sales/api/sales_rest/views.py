@@ -72,9 +72,9 @@ class SalesHistoryDetailEncoder(ModelEncoder):
 @require_http_methods(["GET", "POST"])
 def list_salesperson(request):    
     if request.method == "GET":
-        salesperson = Salesperson.objects.all()
+        salespersons = Salesperson.objects.all()
         return JsonResponse(
-            {"Salesperson": salesperson},
+            {"salespersons": salespersons},
             encoder=SalesPersonListEnconder,
         )
     else:
@@ -111,9 +111,9 @@ def delete_salesperson(request, pk):
 @require_http_methods(["GET", "POST"])
 def list_customer(request):    
     if request.method == "GET":
-        customer = Customer.objects.all()
+        customers = Customer.objects.all()
         return JsonResponse(
-            {"customer": customer},
+            {"customers": customers},
             encoder=CustomerListEnconder,
         )
     else:

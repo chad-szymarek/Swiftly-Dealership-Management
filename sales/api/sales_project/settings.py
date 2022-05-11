@@ -53,14 +53,18 @@ MIDDLEWARE = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:8090",
+    "http://localhost:3000",
 ]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8090",
+    "http://localhost:8100"
 ]
 CORS_ALLOW_CREDENTIALS = True
+
+DJWTO_MODE = "TWO-COOKIES"
+DJWTO_ACCESS_TOKEN_LIFETIME = None
 
 ROOT_URLCONF = 'sales_project.urls'
 
