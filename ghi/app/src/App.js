@@ -7,6 +7,7 @@ import AppointmentForm from './ServiceComponents/AppointmentForm';
 import AppointmentHistory from './ServiceComponents/AppointmentHistory';
 
 import ManufacturerList from './InventoryComponents/ManufacturerList';
+import ManufacturerForm from './InventoryComponents/ManufacturerForm';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           </Route>
           <Route path="manufacturers">
             <Route index element={<ManufacturerList />} />
+            <Route path='create/' element={<ManufacturerForm />} />
           </Route>
         </Routes>
       </div>
