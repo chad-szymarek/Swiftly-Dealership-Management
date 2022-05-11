@@ -5,9 +5,9 @@ import ServiceList from './ServiceLIst';
 import SalespersonForm from './sales/SalespersonForm';
 import SalesForm from './sales/SalesForm';
 import CustomerForm from './sales/CustomerForm';
-import salesPersonHistory from './sales/SalesList';
+import SalesList from './sales/SalesList';
 
-function App() {
+function App(props) {
   return (
     <BrowserRouter>
       <Nav />
@@ -25,7 +25,8 @@ function App() {
           </Route>
           <Route path="/sales">
             <Route index element={<SalesForm />} />
-            <Route path="history" element={<salesPersonHistory />} />
+            <Route path="list" element={<SalesList salesperson={props.salesperson}/>} />
+            {/* <Route path="history" element={<salesPersonHistory />} /> */}
           </Route>
         </Routes>
       </div>

@@ -35,13 +35,16 @@ class SalesHistoryListEncoder(ModelEncoder):
         "automobile",
         "sales_person",
         "customer",
-        "price",
+        "price",        
     ]
 
     def get_extra_data(self, o):
         return {
             "automobile": o.automobile.vin,
-            "sales_person": o.sales_person.name,
+            "sales_person": {
+                 "name" :o.sales_person.name,
+                 "emp_no":o.sales_person.employee_number,
+            },
             "customer": o.customer.name
         } 
 
