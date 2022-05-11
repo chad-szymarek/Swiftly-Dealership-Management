@@ -8,8 +8,10 @@ function ServiceList() {
       "http://localhost:8080/api/appointments/"
     );
     const appointmentData = await responseAppointment.json();
-    setAppointments(appointmentData.appointments);
+    const filteredAppointmentData = appointmentData.appointments.filter(appointment => appointment.finished === false);
+    setAppointments(filteredAppointmentData);
   };
+  console.log(appointments)
 
   useEffect(() => {
     fetchAppointmentData();
@@ -59,38 +61,38 @@ function ServiceList() {
           </tr>
         </thead>
         <tbody>
-          {appointments.map((appointment) => {
-            return (
-              <tr
-                key={appointment.id}
-                data-finished={appointment.finished.toString()}
-              >
-                <td>{appointment.customer_name}</td>
-                {appointment.vip && <td>True</td>}
-                {!appointment.vip && <td>False</td>}
-                <td>{appointment.vin}</td>
-                <td>{appointment.date}</td>
-                <td>{appointment.time}</td>
-                <td>{appointment.technician.employee_number}</td>
-                <td>{appointment.reason}</td>
-                <td>
-                  <button
-                    onClick={async () => {
-                      const response = await deleteAppointment(appointment.id);
-                      await fetchAppointmentData();
-                    }}
-                  >
-                    Cancel
-                  </button>
-                </td>
-                <td>
-                  <button onClick={() => handleClick(appointment.id)}>
-                    Finished
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+          {appointments &&
+            appointments.map((appointment) => {
+              return (
+                <tr
+                  key={appointment.id}
+                >
+                  <td>{appointment.customer_name}</td>
+                  {appointment.vip && <td>True</td>}
+                  {!appointment.vip && <td>False</td>}
+                  <td>{appointment.vin}</td>
+                  <td>{appointment.date}</td>
+                  <td>{appointment.time}</td>
+                  <td>{appointment.technician.employee_number}</td>
+                  <td>{appointment.reason}</td>
+                  <td>
+                    <button
+                      onClick={async () => {
+                        await deleteAppointment(appointment.id);
+                        await fetchAppointmentData();
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  </td>
+                  <td>
+                    <button className="btn btn-success" onClick={() => handleClick(appointment.id)}>
+                      Finished
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
     </>

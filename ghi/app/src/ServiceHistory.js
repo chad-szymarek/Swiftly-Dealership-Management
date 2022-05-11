@@ -11,7 +11,8 @@ function ServiceHistory() {
         "http://localhost:8080/api/appointments/"
       );
       const appointmentData = await responseAppointment.json();
-      setAppointments(appointmentData.appointments);
+      const filteredAppointmentData = appointmentData.appointments.filter(appointment => appointment.finished === true);
+      setAppointments(filteredAppointmentData);
     };
 
     fetchAppointmentData();

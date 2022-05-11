@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function ServiceForm({ onAppointmentCreated }) {
+function ServiceForm() {
   const [customerName, setCustomerName] = useState("");
   const [vin, setVin] = useState("");
   const [date, setDate] = useState("");
@@ -51,8 +51,6 @@ function ServiceForm({ onAppointmentCreated }) {
       setTime("");
       setTechnician("");
       setReason("");
-
-      onAppointmentCreated(response.json())
     }
   };
 
