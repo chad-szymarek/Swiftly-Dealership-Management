@@ -18,7 +18,7 @@ class TechnicianListEncoder(ModelEncoder):
 
 class AppointmentListEncoder(ModelEncoder):
     model = Appointment
-    properties = ["id", "customer_name", "vip","vin", "technician", "reason", "date", "time"]
+    properties = ["customer_name", "vip","vin", "technician", "reason", "date", "time"]
     encoders = {
         "technician": TechnicianListEncoder()
     }
@@ -66,7 +66,7 @@ def api_list_appointments(request):
     else:
         content = json.loads(request.body)
 
-        technician = Technician.objects.get(id=content["technician"])
+        technician = Technician.objects.get(employee_number=content["technician"])
         content["technician"] = technician
 
         try:
