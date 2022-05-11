@@ -1,13 +1,13 @@
 from django.contrib import admin
 
-from .models import Salesperson, Sale, Customer
+from .models import Salesperson, SalesHistory, Customer
 
 @admin.register(Salesperson)
 class ShoeAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(Sale)
+@admin.register(SalesHistory)
 class ShoeAdmin(admin.ModelAdmin):
     pass
 
