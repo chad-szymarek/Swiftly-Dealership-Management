@@ -13,6 +13,7 @@ function Nav() {
                 <NavLink className="dropdown-item" to="/salesperson">New Salesperson</NavLink> 
                 <NavLink className="dropdown-item" to="/customer">New Customer</NavLink> 
                 <NavLink className="dropdown-item" to="/sales">New Sales Record</NavLink> 
+                <NavLink className="dropdown-item" to="/sales/list">Sales List</NavLink> 
                 <NavLink className="dropdown-item" to="/sales/history">Salesperson History</NavLink> 
 
               </div>

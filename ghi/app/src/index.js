@@ -19,5 +19,4 @@ async function loadSales() {
     console.error(salesPersonResponse);
   }
 }
-
 loadSales()
