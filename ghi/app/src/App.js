@@ -6,6 +6,8 @@ import TechnicianForm from './ServiceComponents/TechnicianForm';
 import AppointmentForm from './ServiceComponents/AppointmentForm';
 import AppointmentHistory from './ServiceComponents/AppointmentHistory';
 
+import ManufacturerList from './InventoryComponents/ManufacturerList';
+
 function App() {
   return (
     <BrowserRouter>
@@ -20,6 +22,9 @@ function App() {
           </Route>
           <Route path="technicians">
             <Route index element={<TechnicianForm />} />
+          </Route>
+          <Route path="manufacturers">
+            <Route index element={<ManufacturerList />} />
           </Route>
         </Routes>
       </div>

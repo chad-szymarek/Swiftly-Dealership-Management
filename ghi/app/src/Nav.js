@@ -23,7 +23,7 @@ function Nav() {
             </NavLink>
             <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <NavLink className="dropdown-item" to="/manufacturers/">Show Manufacturers</NavLink> 
-              <NavLink className="dropdown-item" to="/manufacturers/create/">Create Manufacturer</NavLink> 
+              <NavLink className="dropdown-item" to="/create/">Create Manufacturer</NavLink> 
 
             </div>
       </div>
