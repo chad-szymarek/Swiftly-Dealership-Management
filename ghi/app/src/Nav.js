@@ -19,13 +19,11 @@ function Nav() {
         </div>
         <div className="dropdown">
             <NavLink className="btn btn-secondary dropdown-toggle" to="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Services
+              Inventory
             </NavLink>
             <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <NavLink className="dropdown-item" to="/technicians/">Create Technician</NavLink> 
-              <NavLink className="dropdown-item" to="/appointments/">Show Appointments</NavLink> 
-              <NavLink className="dropdown-item" to="/appointments/create/">Create Appointment</NavLink> 
-              <NavLink className="dropdown-item" to="/appointments/history/">Show Appointment History</NavLink> 
+              <NavLink className="dropdown-item" to="/manufacturers/">Show Manufacturers</NavLink> 
+              <NavLink className="dropdown-item" to="/manufacturers/create/">Create Manufacturer</NavLink> 
 
             </div>
       </div>
