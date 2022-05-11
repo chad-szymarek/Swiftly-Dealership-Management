@@ -1,80 +1,52 @@
-// import React from 'react';
+import React from 'react';
 
-// class CustomerForm extends React.Component {
-//     constructor(props) {
-//         console.log("working: ", props)
-//         super(props);
-//         this.state = {
-//             name: '',
-//             address: '',
-//             phoneNumber: '',
-//         }
 
-//     this.handleChange = this.handleChange.bind(this);
-//     this.handleSubmit = this.handleSubmit.bind(this);
-//     }
-
-//     async handleSubmit(event) {
-//         event.preventDefault();
-//         const data = {...this.state};
-//         data.phone_number = data.phoneNumber;
-//         delete data.phoneNumber;               
-//         console.log(data)
+function SalesHistoryList(props) {
     
-//         const nameUrl = 'http://localhost:8090/api/customers/';
-//         const fetchConfig = {
-//           method: "post",
-//           body: JSON.stringify(data),
-//           headers: {
-//             'Content-Type': 'application/json',
-//           },
-//         };
-//         const response = await fetch(nameUrl, fetchConfig);
-//         if (response.ok) {
-//           const newName = await response.json();
-//           console.log(newName)          
-//           const cleared = {
-//             name: '',
-//             address: '',
-//             phoneNumber: '',
-//           }
-//           this.setState(cleared);
-//         }
-//       }
 
-//     handleChange(event) {
-//         const newState = {};
-//         newState[event.target.id] = event.target.value;
-//         this.setState(newState);
-//     }
 
-//     render() {
-//         return (
-//             <div className="row">
-//                 <div className="offset-3 col-6">
-//                     <div className="shadow p-4 mt-4">
-//                         <h1>Add a Customer</h1>
-//                         <form onSubmit={this.handleSubmit} id="create-salesperson-form">
-//                             <div className="form-floating mb-3">
-//                                 <input onChange={this.handleChange} value={this.state.name} placeholder="Customer Name" required type="text" name="name" id="name" className="form-control" />
-//                                 <label htmlFor="name">Customer Name</label>
-//                             </div>                                                        
-//                             <div className="form-floating mb-3">
-//                                 <input onChange={this.handleChange} value={this.state.address} placeholder="Address" required type="text" name="address" id="address" className="form-control" />
-//                                 <label htmlFor="address">Address</label>
-//                             </div>                                                        
-//                             <div className="form-floating mb-3">
-//                                 <input onChange={this.handleChange} value={this.state.phoneNumber} placeholder="Phone Number" required type="number" name="phoneNumber" id="phoneNumber" className="form-control" />
-//                                 <label htmlFor="phone_number">Phone Number</label>
-//                             </div>                                                        
-//                             <button className="btn btn-primary">Create</button>
-//                         </form>
-//                    </div>
-//                 </div>
-//             </div>
-//         )
-//     }
-// }
+
+
+    return (        
+        <>
+        {console.log("whats shit: ", props)
+}
+        <h1>Sales Person History</h1>
+        <select className="form-select" name="salesPerson" id="salesPerson" aria-label="Default select example">
+            <option>Select a Salesperson</option>
+            {props.salesreps.map(salesrep => {
+                return (
+                    <option key={salesrep.id} id="salesrecord">
+                        {salesrep.name}
+                    </option>
+                )
+            })}            
+        </select>
+        <table className="table table-striped">
+            <thead>
+            <tr>
+                <th>Sales person</th>                
+                <th>Customer</th>
+                <th>VIN</th>
+                <th>Sale Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+            {props.salespersons.map(salesperson => {
+                return (
+                <tr key={salesperson.automobile}>  
+                    <td>{ salesperson.sales_person.name }</td>
+                    <td>{ salesperson.customer }</td>
+                    <td>{ salesperson.automobile }</td>
+                    <td>${ salesperson.price }</td>
+                </tr>
+                );
+            })}
+            </tbody>
+        </table>
+        </>
+    );
+  }
   
-
-// export default CustomerForm;
+  export default SalesHistoryList;
