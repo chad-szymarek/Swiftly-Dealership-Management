@@ -2,7 +2,6 @@ import React from 'react';
 
 class CustomerForm extends React.Component {
     constructor(props) {
-        console.log("working: ", props)
         super(props);
         this.state = {
             name: '',

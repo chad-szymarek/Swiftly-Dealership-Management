@@ -24,7 +24,8 @@ class SalesPersonListEnconder(ModelEncoder):
     model = Salesperson
     properties = [
         'name',
-        'employee_number',    
+        'employee_number',
+        'id'
     ]
 
 
