@@ -21,6 +21,7 @@ class Appointment(models.Model):
     time = models.TimeField(null=True)
     technician = models.ForeignKey("Technician", related_name="appointments", on_delete=models.PROTECT)
     reason = models.TextField()
+    finished = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.customer_name} {self.vin}"

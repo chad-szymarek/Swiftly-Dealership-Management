@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 
-function ServiceHistory({ appointments }) {
+function ServiceHistory() {
   const [search, setSearch] = useState("");
   const [filteredAppointments, setFilteredAppointments] = useState([]);
+  const [appointments, setAppointments] = useState([]);
+
+  useEffect(() => {
+    const fetchAppointmentData = async () => {
+      const responseAppointment = await fetch(
+        "http://localhost:8080/api/appointments/"
+      );
+      const appointmentData = await responseAppointment.json();
+      setAppointments(appointmentData.appointments);
+    };
+
+    fetchAppointmentData();
+  }, []);
   
   const handleClick = () => {
-    const filtered = appointments.filter(appointment => {
-        if (appointment.vin === search) {
-            return appointment;
-        }
-    })
+    const filtered = appointments.filter(appointment => appointment.vin === search);
     setFilteredAppointments(filtered);
   } 
 
