@@ -1,6 +1,13 @@
 import React from 'react';
 
 function ServiceList({ appointments }) {
+    const deleteAppointment = async (id) => {
+        fetch(`http://localhost:8080/api/appointments/${id}/`, {
+            method: "DELETE",
+            headers: {'Content-Type': 'application/json'},
+        });
+        window.location.reload();
+    }
 
     console.log("list appointments", appointments)
     // useEffect(() => {
@@ -44,6 +51,7 @@ function ServiceList({ appointments }) {
                                 <td>{appointment.time}</td>
                                 <td>{appointment.technician.employee_number}</td>
                                 <td>{appointment.reason}</td>
+                                <td><button onClick={() => deleteAppointment(appointment.id)}>Cancel</button></td>
                             </tr>
                         )
                     })}

@@ -18,14 +18,14 @@ class TechnicianListEncoder(ModelEncoder):
 
 class AppointmentListEncoder(ModelEncoder):
     model = Appointment
-    properties = ["customer_name", "vip","vin", "technician", "reason", "date", "time"]
+    properties = ["id","customer_name", "vip","vin", "technician", "reason", "date", "time"]
     encoders = {
         "technician": TechnicianListEncoder()
     }
 
 class AppointmentDetailEncoder(ModelEncoder):
     model = Appointment
-    properties = ["customer_name", "vip", "vin", "technician", "reason", "date"]
+    properties = ["id", "customer_name", "vip", "vin", "technician", "reason", "date"]
     encoders = {
         "technician": TechnicianListEncoder()
     }
