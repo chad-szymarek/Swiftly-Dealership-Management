@@ -6,6 +6,9 @@ import SalespersonForm from './sales/SalespersonForm';
 import SalesForm from './sales/SalesForm';
 import CustomerForm from './sales/CustomerForm';
 import SalesList from './sales/SalesList';
+import TechnicianForm from './TechnicianForm';
+import ServiceForm from './ServiceForm';
+import ServiceHistory from './ServiceHistory';
 
 function App(props) {
   return (
@@ -16,6 +19,11 @@ function App(props) {
           <Route path="/" element={<MainPage />} />
           <Route path="services">
             <Route index element={<ServiceList />} />
+            <Route path="create/" element={<ServiceForm />} />
+            <Route path="history/" element={<ServiceHistory />} />
+          </Route>
+          <Route path="technicians">
+            <Route index element={<TechnicianForm />} />
           </Route>
           <Route path="/salesperson">
             <Route index element={<SalespersonForm />} />

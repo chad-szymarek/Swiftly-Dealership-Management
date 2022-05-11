@@ -22,6 +22,7 @@ def poll():
             content = json.loads(response.content)
 
             for automobile in content["autos"]:
+                print("autos", automobile)
                 AutomobileVO.objects.update_or_create(
                     import_href=automobile["href"],
                     defaults={"vin": automobile["vin"]},

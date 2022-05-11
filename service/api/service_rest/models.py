@@ -15,11 +15,13 @@ class Technician(models.Model):
 
 class Appointment(models.Model):
     customer_name = models.CharField(max_length=200)
+    vip = models.BooleanField(default=False)
     vin = models.CharField(max_length=300)
     date = models.DateField(null=True)
     time = models.TimeField(null=True)
     technician = models.ForeignKey("Technician", related_name="appointments", on_delete=models.PROTECT)
     reason = models.TextField()
+    finished = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.customer_name} {self.vin}"
