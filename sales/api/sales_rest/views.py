@@ -169,9 +169,9 @@ def list_sales(request):
             )
 
         try:
-            sales_rep_name = content["sales_person"]
-            sales_rep = Salesperson.objects.get(name=sales_rep_name)
-            content["sales_person"] = sales_rep
+            salesperson_name = content["sales_person"]
+            salesperson = Salesperson.objects.get(name=salesperson_name)
+            content["sales_person"] = salesperson
         except Salesperson.DoesNotExist:
             return JsonResponse(
                 {"message": "Salesperson not in system"},
@@ -219,9 +219,9 @@ def show_sale(request, pk):
     else:
 
         try:
-            sales_rep_name = content["sales_person"]
-            sales_rep = Salesperson.objects.get(name=sales_rep_name)
-            content["sales_person"] = sales_rep
+            salesperson_name = content["sales_person"]
+            salesperson = Salesperson.objects.get(name=salesperson_name)
+            content["sales_person"] = salesperson
         except Salesperson.DoesNotExist:
             return JsonResponse(
                 {"message": "Salesperson not in system"},
