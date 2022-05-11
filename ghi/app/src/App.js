@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
-import ServiceList from './ServiceLIst';
+import ServiceList from './ServiceList';
 import TechnicianForm from './TechnicianForm';
 import ServiceForm from './ServiceForm';
+import ServiceHistory from './ServiceHistory';
 
 function App() {
   const [currentAppointments, setCurrentAppointments] = useState([]);
@@ -36,6 +37,7 @@ function App() {
           <Route path="services">
             <Route index element={<ServiceList appointments={currentAppointments} />} />
             <Route path="create/" element={<ServiceForm appointments={currentAppointments} technicians={currentTechnicians} />} />
+            <Route path="history/" element={<ServiceHistory appointments={currentAppointments} />} />
           </Route>
           <Route path="technicians">
             <Route index element={<TechnicianForm technicians={currentTechnicians} />} />

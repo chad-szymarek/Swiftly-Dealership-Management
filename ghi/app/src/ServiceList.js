@@ -9,17 +9,6 @@ function ServiceList({ appointments }) {
         window.location.reload();
     }
 
-    console.log("list appointments", appointments)
-    // useEffect(() => {
-    //     const fetchData = async () => {
-    //         const response = await fetch('http://localhost:8080/api/appointments/');
-    //         const data = await response.json()
-    //         setCurrentAppointments(data.appointments);
-    //     }
-    //     fetchData()
-    // }, []);
-    // console.log(typeof(currentAppointments))
-
     return(
         <>
             <table className="table table-striped table-hover">
@@ -39,7 +28,6 @@ function ServiceList({ appointments }) {
                         return (
                             <tr key={appointment.id}>
                                 <td>{appointment.customer_name}</td>
-                                {/* <td>{appointment.vip}</td> */}
                                 {appointment.vip && (
                                     <td>True</td>
                                 )}
