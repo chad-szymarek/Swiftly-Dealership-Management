@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
-import ServiceList from './ServiceList';
-import TechnicianForm from './TechnicianForm';
-import ServiceForm from './ServiceForm';
-import ServiceHistory from './ServiceHistory';
+import AppointmentList from './ServiceComponents/AppointmentList';
+import TechnicianForm from './ServiceComponents/TechnicianForm';
+import AppointmentForm from './ServiceComponents/AppointmentForm';
+import AppointmentHistory from './ServiceComponents/AppointmentHistory';
 
 function App() {
   return (
@@ -13,10 +13,10 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="services">
-            <Route index element={<ServiceList />} />
-            <Route path="create/" element={<ServiceForm />} />
-            <Route path="history/" element={<ServiceHistory />} />
+          <Route path="appointments">
+            <Route index element={<AppointmentList />} />
+            <Route path="create/" element={<AppointmentForm />} />
+            <Route path="history/" element={<AppointmentHistory />} />
           </Route>
           <Route path="technicians">
             <Route index element={<TechnicianForm />} />
