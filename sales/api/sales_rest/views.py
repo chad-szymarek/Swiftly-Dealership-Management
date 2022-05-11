@@ -24,7 +24,8 @@ class SalesPersonListEnconder(ModelEncoder):
     model = Salesperson
     properties = [
         'name',
-        'employee_number',    
+        'employee_number',
+        'id'
     ]
 
 
@@ -34,13 +35,16 @@ class SalesHistoryListEncoder(ModelEncoder):
         "automobile",
         "sales_person",
         "customer",
-        "price",
+        "price",        
     ]
 
     def get_extra_data(self, o):
         return {
             "automobile": o.automobile.vin,
-            "sales_person": o.sales_person.name,
+            "sales_person": {
+                 "name" :o.sales_person.name,
+                 "emp_no":o.sales_person.employee_number,
+            },
             "customer": o.customer.name
         } 
 
@@ -71,9 +75,9 @@ class SalesHistoryDetailEncoder(ModelEncoder):
 @require_http_methods(["GET", "POST"])
 def list_salesperson(request):    
     if request.method == "GET":
-        salesperson = Salesperson.objects.all()
+        salespersons = Salesperson.objects.all()
         return JsonResponse(
-            {"Salesperson": salesperson},
+            {"salespersons": salespersons},
             encoder=SalesPersonListEnconder,
         )
     else:
@@ -110,9 +114,9 @@ def delete_salesperson(request, pk):
 @require_http_methods(["GET", "POST"])
 def list_customer(request):    
     if request.method == "GET":
-        customer = Customer.objects.all()
+        customers = Customer.objects.all()
         return JsonResponse(
-            {"customer": customer},
+            {"customers": customers},
             encoder=CustomerListEnconder,
         )
     else:
@@ -169,9 +173,9 @@ def list_sales(request):
             )
 
         try:
-            sales_rep_name = content["sales_person"]
-            sales_rep = Salesperson.objects.get(name=sales_rep_name)
-            content["sales_person"] = sales_rep
+            salesperson_name = content["sales_person"]
+            salesperson = Salesperson.objects.get(name=salesperson_name)
+            content["sales_person"] = salesperson
         except Salesperson.DoesNotExist:
             return JsonResponse(
                 {"message": "Salesperson not in system"},
@@ -219,9 +223,9 @@ def show_sale(request, pk):
     else:
 
         try:
-            sales_rep_name = content["sales_person"]
-            sales_rep = Salesperson.objects.get(name=sales_rep_name)
-            content["sales_person"] = sales_rep
+            salesperson_name = content["sales_person"]
+            salesperson = Salesperson.objects.get(name=salesperson_name)
+            content["sales_person"] = salesperson
         except Salesperson.DoesNotExist:
             return JsonResponse(
                 {"message": "Salesperson not in system"},
