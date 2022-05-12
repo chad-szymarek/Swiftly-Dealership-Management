@@ -36,14 +36,6 @@ function TechnicianForm() {
     });
   }
 
-  const handleNameChange = (event) => {
-    setTechnicianName(event.target.value);
-  };
-
-  const handleEmployeeNumberChange = (event) => {
-    setEmployeeNumber(event.target.value);
-  };
-
   return (
     <div className="row">
       <div className="offset-3 col-6">
