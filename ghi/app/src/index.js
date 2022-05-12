@@ -8,7 +8,7 @@ async function loadSales() {
   const salesPersonResponse = await fetch('http://localhost:8090/api/sales/');
   const salesrepResponse = await fetch('http://localhost:8090/api/salespersons/');
 
-  if (salesPersonResponse.ok || salesrepResponse.ok)  {
+  if (salesPersonResponse.ok && salesrepResponse.ok)  {
     const salespersonData = await salesPersonResponse.json();
     const salesrepData = await salesrepResponse.json();
     root.render(

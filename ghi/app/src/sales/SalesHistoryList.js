@@ -3,35 +3,36 @@ import React, { useEffect, useState } from 'react';
 
 function SalesHistoryList(props) {
     const salespersons = props.salespersons
-    const [salesHistory, setSalesHistory] = useState()
-    const [salesData, setSalesData] = useState()
+    const [salesRecord, setSalesRecord] = useState()
+    const [salesData, setSalesData] = useState(salespersons)
     
     
     const handleChange = (event) => {
-        setSalesHistory(event.target.value);
+        setSalesRecord(event.target.value);
       };
 
     useEffect(() => {
-        if (!salesHistory || salespersons.sales_person.emp_no === undefined) {
-            return;
-        }
         const GetSalesData = () => {
-            const salesPersonData = salespersons.filter(salesrecord => {
-
-                return salesrecord.sales_person.emp_no === salesHistory.sales_person.emp_no
+            if (!salesRecord) {
+                setSalesData(salespersons)
+                return;
+            }
+            
+            const salesPersonData = salespersons.filter(salesperson => {                
+                const salesperson1 = salesperson.sales_person.emp_no
+                return salesperson1 === Number(salesRecord)
             })
             setSalesData(salesPersonData)
         }
         GetSalesData()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [salesHistory]);
+    }, [salesRecord, salespersons]);
 
 
 
     return (        
         <>
         <h1>Sales Person History</h1>
-        <select onChange={handleChange} value={salesHistory} className="form-select" name="salesPerson" id="salesPerson" aria-label="Default select example">
+        <select onChange={handleChange} value={salesRecord} className="form-select" name="salesPerson" id="salesPerson" aria-label="Default select example">
             <option>Select a Salesperson</option>
             {props.salesreps.map(salesrep => {
                 return (
@@ -50,9 +51,8 @@ function SalesHistoryList(props) {
                 <th>Sale Price</th>
             </tr>
             </thead>
-            <tbody>
-            {salesData !== undefined && 
-                salesData.map((salesperson) => {           
+            <tbody>            
+                {salesData.map((salesperson) => {           
                  console.log("sandwich", salesperson)
                     return (                       
                     <tr key={salesperson.automobile}>  
