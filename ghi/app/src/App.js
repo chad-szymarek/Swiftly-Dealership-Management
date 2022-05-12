@@ -10,9 +10,10 @@ import ManufacturerList from './InventoryComponents/ManufacturerList';
 import ManufacturerForm from './InventoryComponents/ManufacturerForm';
 
 import SalespersonForm from './sales/SalespersonForm';
-import SalesForm from './sales/SalesForm';
 import CustomerForm from './sales/CustomerForm';
+import SalesForm from './sales/SalesForm';
 import SalesList from './sales/SalesList';
+import SalesHistoryList from './sales/SalesHistoryList';
 
 function App(props) {
   return (
@@ -41,8 +42,8 @@ function App(props) {
           </Route>
           <Route path="/sales">
             <Route index element={<SalesForm />} />
-            <Route path="list" element={<SalesList salesperson={props.salesperson}/>} />
-            {/* <Route path="history" element={<salesPersonHistory />} /> */}
+            <Route path="list" element={<SalesList salespersons={props.salespersons}/>} />
+            <Route path="history" element={<SalesHistoryList salespersons={props.salespersons} salesreps={props.salesreps}/>} />
           </Route>
         </Routes>
       </div>
