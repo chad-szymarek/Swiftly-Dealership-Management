@@ -25,11 +25,15 @@ function AppointmentHistory() {
 
   return (
     <>
-        <div>
-            <input type="text" placeholder="Search vins" onChange={event => setSearch(event.target.value)} />
-            <span><button onClick={handleClick} type="submit">Search</button></span>
-        </div>
-        <table className="table table-striped table-hover">
+        <form className="form-inline">
+          <div className="input-group p-2">
+            <input className="form-control mr-sm-2 pr-3" type="search" placeholder="Search vins" onChange={event => setSearch(event.target.value)} />
+            <div className="px-2">
+              <button className="btn btn-outline-success my-2 my-sm-0" onClick={handleClick} type="submit">Search VINs</button>
+            </div>
+          </div>
+        </form>
+        <table className="table table-striped">
             <thead>
             <tr>
                 <th>Customer</th>
