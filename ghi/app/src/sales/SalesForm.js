@@ -47,7 +47,6 @@ class SalesForm extends React.Component {
         delete data.salesPerson;
         delete data.customers;               
         delete data.autos;               
-        console.log(data)
     
         const salesHistoryUrl = 'http://localhost:8090/api/sales/';
         const fetchConfig = {
@@ -60,7 +59,6 @@ class SalesForm extends React.Component {
         const response = await fetch(salesHistoryUrl, fetchConfig);
         if (response.ok) {
           const newName = await response.json();
-          console.log(newName)          
           const cleared = {
             salesPerson: '',
             automobile: '',

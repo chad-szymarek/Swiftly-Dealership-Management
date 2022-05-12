@@ -9,7 +9,6 @@ async function loadSales() {
 
   if (salesPersonResponse.ok)  {
     const salespersonData = await salesPersonResponse.json();
-    console.log(salespersonData)
     root.render(
       <React.StrictMode>
         <App salesperson={salespersonData}/>

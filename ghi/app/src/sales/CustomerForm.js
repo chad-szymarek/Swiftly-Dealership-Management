@@ -2,7 +2,6 @@ import React from 'react';
 
 class CustomerForm extends React.Component {
     constructor(props) {
-        console.log("something: ", props)
         super(props);
         this.state = {
             name: '',
@@ -19,7 +18,6 @@ class CustomerForm extends React.Component {
         const data = {...this.state};
         data.phone_number = data.phoneNumber;
         delete data.phoneNumber;               
-        console.log(data)
     
         const nameUrl = 'http://localhost:8090/api/customers/';
         const fetchConfig = {
@@ -31,8 +29,6 @@ class CustomerForm extends React.Component {
         };
         const response = await fetch(nameUrl, fetchConfig);
         if (response.ok) {
-          const newName = await response.json();
-          console.log(newName)          
           const cleared = {
             name: '',
             address: '',
