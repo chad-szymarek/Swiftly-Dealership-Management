@@ -8,7 +8,9 @@ function AppointmentList() {
       "http://localhost:8080/api/appointments/"
     );
     const appointmentData = await responseAppointment.json();
-    const filteredAppointmentData = appointmentData.appointments.filter(appointment => appointment.finished === false);
+    const filteredAppointmentData = appointmentData.appointments.filter(
+      (appointment) => appointment.finished === false
+    );
     setAppointments(filteredAppointmentData);
   };
 
@@ -63,9 +65,7 @@ function AppointmentList() {
           {appointments &&
             appointments.map((appointment) => {
               return (
-                <tr
-                  key={appointment.id}
-                >
+                <tr key={appointment.id}>
                   <td>{appointment.customer_name}</td>
                   {appointment.vip && <td>True</td>}
                   {!appointment.vip && <td>False</td>}
@@ -85,7 +85,10 @@ function AppointmentList() {
                     </button>
                   </td>
                   <td>
-                    <button className="btn btn-success" onClick={() => handleClick(appointment.id)}>
+                    <button
+                      className="btn btn-success"
+                      onClick={() => handleClick(appointment.id)}
+                    >
                       Finished
                     </button>
                   </td>

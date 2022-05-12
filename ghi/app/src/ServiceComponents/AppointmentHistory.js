@@ -11,53 +11,73 @@ function AppointmentHistory() {
         "http://localhost:8080/api/appointments/"
       );
       const appointmentData = await responseAppointment.json();
-      const filteredAppointmentData = appointmentData.appointments.filter(appointment => appointment.finished === true);
+      const filteredAppointmentData = appointmentData.appointments.filter(
+        (appointment) => appointment.finished === true
+      );
       setAppointments(filteredAppointmentData);
     };
 
     fetchAppointmentData();
   }, []);
-  
+
   const handleClick = () => {
-    const filtered = appointments.filter(appointment => appointment.vin === search);
+    const filtered = appointments.filter(
+      (appointment) => appointment.vin === search
+    );
     setFilteredAppointments(filtered);
-  } 
+  };
 
   return (
     <>
-        <div>
-            <input type="text" placeholder="Search vins" onChange={event => setSearch(event.target.value)} />
-            <span><button onClick={handleClick} type="submit">Search</button></span>
+      <form className="form-inline">
+        <div className="p-3 input-group">
+          <input
+            className="form-control mr-sm-2 "
+            type="search"
+            placeholder="Search vins"
+            onChange={(event) => setSearch(event.target.value)}
+          />
+          <div className="px-2">
+            <button
+              className="btn btn-outline-success my-2 my-sm-0"
+              onClick={handleClick}
+              type="submit"
+            >
+              Search VINs
+            </button>
+          </div>
         </div>
-        <table className="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th>Customer</th>
-                <th>Vip</th>
-                <th>Vin</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Technician</th>
-                <th>Reason</th>
-            </tr>
-            </thead>
-            <tbody>
-            {filteredAppointments.map((appointment) => {
-                return (
-                <tr key={appointment.id}>
-                    <td>{appointment.customer_name}</td>
-                    {appointment.vip && <td>True</td>}
-                    {!appointment.vip && <td>False</td>}
-                    <td>{appointment.vin}</td>
-                    <td>{appointment.date}</td>
-                    <td>{appointment.time}</td>
-                    <td>{appointment.technician.employee_number}</td>
-                    <td>{appointment.reason}</td>
-                </tr>
-                );
-            })}
-            </tbody>
-        </table>
+      </form>
+
+      <table className="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Customer</th>
+            <th>Vip</th>
+            <th>Vin</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Technician</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filteredAppointments.map((appointment) => {
+            return (
+              <tr key={appointment.id}>
+                <td>{appointment.customer_name}</td>
+                {appointment.vip && <td>True</td>}
+                {!appointment.vip && <td>False</td>}
+                <td>{appointment.vin}</td>
+                <td>{appointment.date}</td>
+                <td>{appointment.time}</td>
+                <td>{appointment.technician.employee_number}</td>
+                <td>{appointment.reason}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </>
   );
 }

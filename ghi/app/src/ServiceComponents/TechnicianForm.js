@@ -2,9 +2,9 @@ import React, { useState } from "react";
 
 function TechnicianForm() {
   const [state, setState] = useState({
-    name: '',
-    employee_number: '',
-  })
+    name: "",
+    employee_number: "",
+  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -22,19 +22,19 @@ function TechnicianForm() {
 
     if (response.ok) {
       setState({
-        name: '',
-        employee_number: '',
-      })
+        name: "",
+        employee_number: "",
+      });
     }
   };
-  
-  const handleChange = event => {
+
+  const handleChange = (event) => {
     const value = event.target.value;
     setState({
       ...state,
-      [event.target.name]: value
+      [event.target.name]: value,
     });
-  }
+  };
 
   return (
     <div className="row">
