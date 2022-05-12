@@ -25,17 +25,6 @@ function AppointmentForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-<<<<<<< HEAD
-=======
-    const data = {
-      customer_name: customerName,
-      vin: vin,
-      date: date,
-      time: time,
-      technician: technician,
-      reason: reason,
-    };
->>>>>>> main
 
     const appointmentUrl = "http://localhost:8080/api/appointments/";
     const fetchConfig = {
