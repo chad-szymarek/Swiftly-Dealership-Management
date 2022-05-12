@@ -11,7 +11,7 @@ function ManufacturerList() {
         }
         fetchManufacturerData();
     }, []);
-    console.log(manufacturers)
+
     return (
         <table className="table table-striped">
             <thead>
