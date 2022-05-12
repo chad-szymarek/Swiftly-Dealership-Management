@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 
 function ManufacturerForm() {
-    const [name, setName] = useState('');
+    const [state, setState] = useState({
+      name: '',
+    });
 
         const handleSubmit = async event => {
             event.preventDefault();
-            const data = {
-                name,
-            };
 
             const manufacturerUrl = 'http://localhost:8100/api/manufacturers/';
             const fetchConfig = {
                 method: "POST",
-                body: JSON.stringify(data),
+                body: JSON.stringify(state),
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -20,12 +19,18 @@ function ManufacturerForm() {
             const resposne = await fetch(manufacturerUrl, fetchConfig);
 
             if (resposne.ok) {
-                setName('');
+                setState({
+                  name: '',
+                });
             }
         }
 
-        const handleNameChange = (event) => {
-            setName(event.target.value);
+        const handleChange = (event) => {
+          const value = event.target.value;
+          setState({
+            ...state,
+            [event.target.name]: value
+          })
         }
     return (
       <div className="row">
@@ -35,8 +40,8 @@ function ManufacturerForm() {
             <form onSubmit={handleSubmit} id="create-manufacturer-form">
               <div className="form-floating mb-3">
                 <input
-                  onChange={handleNameChange}
-                  value={name}
+                  onChange={handleChange}
+                  value={state.name}
                   placeholder="Manufacturer Name"
                   required
                   name="name"

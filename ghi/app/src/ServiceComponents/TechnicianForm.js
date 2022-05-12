@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 
 function TechnicianForm() {
-  const [technicianName, setTechnicianName] = useState("");
-  const [employeeNumber, setEmployeeNumber] = useState("");
+  const [state, setState] = useState({
+    name: '',
+    employee_number: '',
+  })
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = {
-      name: technicianName,
-      employee_number: employeeNumber,
-    };
+    const data = state;
 
     const technicianUrl = "http://localhost:8080/api/technicians/";
     const fetchConfig = {
@@ -22,18 +21,20 @@ function TechnicianForm() {
     const response = await fetch(technicianUrl, fetchConfig);
 
     if (response.ok) {
-      setTechnicianName("");
-      setEmployeeNumber("");
+      setState({
+        name: '',
+        employee_number: '',
+      })
     }
   };
-
-  const handleNameChange = (event) => {
-    setTechnicianName(event.target.value);
-  };
-
-  const handleEmployeeNumberChange = (event) => {
-    setEmployeeNumber(event.target.value);
-  };
+  
+  const handleChange = event => {
+    const value = event.target.value;
+    setState({
+      ...state,
+      [event.target.name]: value
+    });
+  }
 
   return (
     <div className="row">
@@ -43,11 +44,11 @@ function TechnicianForm() {
           <form onSubmit={handleSubmit} id="create-technician-form">
             <div className="form-floating mb-3">
               <input
-                onChange={handleNameChange}
-                value={technicianName}
+                onChange={handleChange}
+                value={state.name}
                 placeholder="Technician Name"
                 required
-                name="technician_name"
+                name="name"
                 id="technician_name"
                 className="form-control"
               />
@@ -55,8 +56,8 @@ function TechnicianForm() {
             </div>
             <div className="form-floating mb-3">
               <input
-                onChange={handleEmployeeNumberChange}
-                value={employeeNumber}
+                onChange={handleChange}
+                value={state.employee_number}
                 placeholder="Employee Number"
                 required
                 name="employee_number"

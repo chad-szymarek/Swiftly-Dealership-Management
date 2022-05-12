@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 function AppointmentList() {
   const [appointments, setAppointments] = useState([]);
+
   const fetchAppointmentData = async () => {
     const responseAppointment = await fetch(
       "http://localhost:8080/api/appointments/"
@@ -10,7 +11,6 @@ function AppointmentList() {
     const filteredAppointmentData = appointmentData.appointments.filter(appointment => appointment.finished === false);
     setAppointments(filteredAppointmentData);
   };
-  console.log(appointments)
 
   useEffect(() => {
     fetchAppointmentData();
