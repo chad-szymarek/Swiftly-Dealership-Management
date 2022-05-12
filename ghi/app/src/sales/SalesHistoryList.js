@@ -20,6 +20,7 @@ function SalesHistoryList(props) {
             
             const salesPersonData = salespersons.filter(salesperson => {                
                 const salesperson1 = salesperson.sales_person.emp_no
+                console.log("wtf is this: ", salesRecord)
                 return salesperson1 === Number(salesRecord)
             })
             setSalesData(salesPersonData)
