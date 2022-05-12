@@ -10,7 +10,7 @@ class SalesForm extends React.Component {
             price: '',
             salesPersons: [],
             autos: [],
-            customers: [],           
+            customers: [],                      
         }
 
     this.handleChange = this.handleChange.bind(this);
@@ -21,19 +21,34 @@ class SalesForm extends React.Component {
         const salesUrl = "http://localhost:8090/api/salespersons/";
         const customerUrl = "http://localhost:8090/api/customers/";
         const autoUrl = "http://localhost:8100/api/automobiles/";
+        const soldUrl = 'http://localhost:8090/api/sales/';
 
         const salesResponse = await fetch(salesUrl);
         const customerResponse = await fetch(customerUrl);
         const autoResponse = await fetch(autoUrl);
+        const soldResponse = await fetch(soldUrl);
+        
 
-        if (autoResponse.ok && customerResponse.ok && autoResponse.ok) {
+        if (autoResponse.ok && customerResponse.ok && autoResponse.ok && soldResponse.ok) {
             const saleData = await salesResponse.json();
             const customerData = await customerResponse.json();
             const autoData = await autoResponse.json();
+            const soldData = await soldResponse.json();
+
+            const notSold = autoData.autos
+            const soldCars = soldData.sales
+
+            const soldVins = soldCars.reduce( (accum, soldCar) => {
+              accum[soldCar.automobile] = true
+              return accum
+            }, {})
+            const filteredCars = notSold.filter( unsold => !soldVins[unsold.vin])
+
+
             this.setState({ 
                 salesPersons: saleData.salespersons,
                 customers: customerData.customers,
-                autos: autoData.autos
+                autos: filteredCars,
              })
         }
     }  
@@ -76,6 +91,8 @@ class SalesForm extends React.Component {
         newState[event.target.id] = event.target.value;
         this.setState(newState);
     }
+
+
 
         render() {
             return (
