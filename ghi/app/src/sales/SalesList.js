@@ -2,7 +2,10 @@ import React from 'react';
 
 
 function SalesList(props) {
+  
     return (
+      <>
+      <h1>Sales List</h1>
       <table className="table table-striped">
         <thead>
           <tr>
@@ -14,7 +17,7 @@ function SalesList(props) {
           </tr>
         </thead>
         <tbody>
-          {props.salesperson.sales.map(salesperson => {
+          {props.salespersons.map(salesperson => {
             return (
               <tr key={salesperson.automobile}>  
                 <td>{ salesperson.sales_person.name }</td>
@@ -27,7 +30,16 @@ function SalesList(props) {
           })}
         </tbody>
       </table>
+      </>
     );
   }
   
   export default SalesList;
+  
+
+/*  You need to show a page that lists all sales showing: 
+sales person's name, 
+employee number,
+the purchaser's name,
+the automobile VIN,
+price of the sale */

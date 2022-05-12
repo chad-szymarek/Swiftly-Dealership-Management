@@ -11,8 +11,6 @@ async function loadSales() {
   if (salesPersonResponse.ok || salesrepResponse.ok)  {
     const salespersonData = await salesPersonResponse.json();
     const salesrepData = await salesrepResponse.json();
-    console.log("saleshistory: ", salespersonData)
-    console.log("salesrep: ", salesrepData)
     root.render(
       <React.StrictMode>
         <App salespersons={salespersonData.sales} salesreps={salesrepData.salespersons}/>

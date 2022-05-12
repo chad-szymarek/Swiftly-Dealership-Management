@@ -31,7 +31,6 @@ function ServiceForm() {
       technician: technician,
       reason: reason,
     };
-    console.log("data", data);
 
     const appointmentUrl = "http://localhost:8080/api/appointments/";
     const fetchConfig = {
