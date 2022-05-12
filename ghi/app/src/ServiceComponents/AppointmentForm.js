@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function ServiceForm() {
+function AppointmentForm() {
   const [customerName, setCustomerName] = useState("");
   const [vin, setVin] = useState("");
   const [date, setDate] = useState("");
@@ -176,4 +176,4 @@ function ServiceForm() {
   );
 }
 
-export default ServiceForm;
+export default AppointmentForm;

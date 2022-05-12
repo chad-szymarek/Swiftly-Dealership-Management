@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function ServiceHistory() {
+function AppointmentHistory() {
   const [search, setSearch] = useState("");
   const [filteredAppointments, setFilteredAppointments] = useState([]);
   const [appointments, setAppointments] = useState([]);
@@ -62,4 +62,4 @@ function ServiceHistory() {
   );
 }
 
-export default ServiceHistory;
+export default AppointmentHistory;

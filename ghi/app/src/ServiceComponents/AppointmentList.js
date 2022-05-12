@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./ServiceList.css";
 
-function ServiceList() {
+function AppointmentList() {
   const [appointments, setAppointments] = useState([]);
   const fetchAppointmentData = async () => {
     const responseAppointment = await fetch(
@@ -99,4 +98,4 @@ function ServiceList() {
   );
 }
 
-export default ServiceList;
+export default AppointmentList;

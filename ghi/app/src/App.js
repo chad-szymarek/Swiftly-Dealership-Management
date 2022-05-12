@@ -1,14 +1,18 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainPage from './MainPage';
 import Nav from './Nav';
-import ServiceList from './ServiceList';
+import AppointmentList from './ServiceComponents/AppointmentList';
+import TechnicianForm from './ServiceComponents/TechnicianForm';
+import AppointmentForm from './ServiceComponents/AppointmentForm';
+import AppointmentHistory from './ServiceComponents/AppointmentHistory';
+
+import ManufacturerList from './InventoryComponents/ManufacturerList';
+import ManufacturerForm from './InventoryComponents/ManufacturerForm';
+
 import SalespersonForm from './sales/SalespersonForm';
-import SalesForm from './sales/SalesForm';
 import CustomerForm from './sales/CustomerForm';
+import SalesForm from './sales/SalesForm';
 import SalesList from './sales/SalesList';
-import TechnicianForm from './TechnicianForm';
-import ServiceForm from './ServiceForm';
-import ServiceHistory from './ServiceHistory';
 import SalesHistoryList from './sales/SalesHistoryList';
 
 function App(props) {
@@ -18,13 +22,17 @@ function App(props) {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="services">
-            <Route index element={<ServiceList />} />
-            <Route path="create/" element={<ServiceForm />} />
-            <Route path="history/" element={<ServiceHistory />} />
+          <Route path="appointments">
+            <Route index element={<AppointmentList />} />
+            <Route path="create/" element={<AppointmentForm />} />
+            <Route path="history/" element={<AppointmentHistory />} />
           </Route>
           <Route path="technicians">
             <Route index element={<TechnicianForm />} />
+          </Route>
+          <Route path="manufacturers">
+            <Route index element={<ManufacturerList />} />
+            <Route path='create/' element={<ManufacturerForm />} />
           </Route>
           <Route path="/salesperson">
             <Route index element={<SalespersonForm />} />
