@@ -8,6 +8,10 @@ import AppointmentHistory from './ServiceComponents/AppointmentHistory';
 
 import ManufacturerList from './InventoryComponents/ManufacturerList';
 import ManufacturerForm from './InventoryComponents/ManufacturerForm';
+import AutomobileList from './InventoryComponents/AutomobileList';
+import AutomobileForm from './InventoryComponents/AutomobileForm';
+import VehicleList from './InventoryComponents/VehicleList';
+import VehicleForm from './InventoryComponents/VehicleForm';
 
 import SalespersonForm from './sales/SalespersonForm';
 import CustomerForm from './sales/CustomerForm';
@@ -33,6 +37,14 @@ function App(props) {
           <Route path="manufacturers">
             <Route index element={<ManufacturerList />} />
             <Route path='create/' element={<ManufacturerForm />} />
+          </Route>
+          <Route path="automobiles">
+            <Route index element={<AutomobileList />} />
+            <Route path='create/' element={<AutomobileForm />} />
+          </Route>
+          <Route path="vehicles">
+            <Route index element={<VehicleList />} />
+            <Route path='create/' element={<VehicleForm />} />
           </Route>
           <Route path="/salesperson">
             <Route index element={<SalespersonForm />} />
