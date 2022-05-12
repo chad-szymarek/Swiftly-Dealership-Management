@@ -4,8 +4,8 @@ function Nav() {
   return (
      <nav className="navbar navbar-expand-lg navbar-dark bg-success">
         <div className="container-fluid">        
-          <NavLink className="navbar-brand" to="/">CarCar</NavLink>
-          <div className="dropdown">
+          <NavLink className="navbar-brand" to="/">Drive Schwifty</NavLink>
+          <div className="p-2 dropdown">
               <NavLink className="btn btn-secondary dropdown-toggle" to="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Services
               </NavLink>
@@ -17,26 +17,22 @@ function Nav() {
 
               </div>
         </div>
-        <div className="dropdown">
+        <div className="p-2 dropdown">
             <NavLink className="btn btn-secondary dropdown-toggle" to="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Inventory
             </NavLink>
             <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <NavLink className="dropdown-item" to="/manufacturers/">Show Manufacturers</NavLink> 
               <NavLink className="dropdown-item" to="/manufacturers/create/">Create Manufacturer</NavLink> 
+              <NavLink className="dropdown-item" to="/automobiles/">Show Automobiles</NavLink> 
+              <NavLink className="dropdown-item" to="/automobiles/create/">Create Automobiles</NavLink> 
+              <NavLink className="dropdown-item" to="/vehicles/">Show Vehicles</NavLink> 
+              <NavLink className="dropdown-item" to="/vehicles/create/">Create Vehicles</NavLink> 
 
             </div>
       </div>
-         <div className="dropdown">
-           <NavLink
-            className="btn btn-secondary dropdown-toggle"
-            to="#"
-            role="button"
-            id="dropdownMenuLink"
-            data-bs-toggle="dropdown"
-            aria-haspopup="true"
-            aria-expanded="false"
-          >
+         <div className="p-2 dropdown">
+           <NavLink className="btn btn-secondary dropdown-toggle" to="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Sales
           </NavLink>
           <div className="dropdown-menu" aria-labelledby="dropdownMenuLink">

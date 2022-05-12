@@ -19,8 +19,7 @@ function SalesHistoryList(props) {
             }
             
             const salesPersonData = salespersons.filter(salesperson => {                
-                const salesperson1 = salesperson.sales_person.emp_no
-                console.log("wtf is this: ", salesRecord)
+                const salesperson1 = salesperson.sales_person.emp_no                
                 return salesperson1 === Number(salesRecord)
             })
             setSalesData(salesPersonData)
@@ -54,7 +53,6 @@ function SalesHistoryList(props) {
             </thead>
             <tbody>            
                 {salesData.map((salesperson) => {           
-                 console.log("sandwich", salesperson)
                     return (                       
                     <tr key={salesperson.automobile}>  
                         <td>{ salesperson.sales_person.name }</td>
