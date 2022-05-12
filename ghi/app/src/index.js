@@ -5,22 +5,22 @@ import App from './App';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 async function loadDealership() {
-  const salesPersonResponse = await fetch('http://localhost:8090/api/sales/');
+  const salesRecordResponse = await fetch('http://localhost:8090/api/sales/');
   const salesrepResponse = await fetch('http://localhost:8090/api/salespersons/');
 
-  if (salesPersonResponse.ok && salesrepResponse.ok)  {
-    const salespersonData = await salesPersonResponse.json();
+  if (salesRecordResponse.ok && salesrepResponse.ok)  {
+    const salesRecordData = await salesRecordResponse.json();
     const salesrepData = await salesrepResponse.json();
 
     root.render(
       <React.StrictMode>
-        <App salespersons={salespersonData.sales}
+        <App salespersons={salesRecordData.sales}
          salesreps={salesrepData.salespersons}
          />
       </React.StrictMode>
     );            
   } else {
-    console.error(salesPersonResponse || salesrepResponse);
+    console.error(salesRecordResponse || salesrepResponse);
   }
 }
 loadDealership()
