@@ -20,9 +20,7 @@ def poll():
             url = "http://inventory-api:8000/api/automobiles/"
             response = requests.get(url)
             content = json.loads(response.content)
-
-            for automobile in content["autos"]:
-                print("autos", automobile)
+            for automobile in content["autos"]:                
                 AutomobileVO.objects.update_or_create(
                     import_href=automobile["href"],
                     defaults={"vin": automobile["vin"]},
