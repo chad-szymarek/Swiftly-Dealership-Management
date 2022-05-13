@@ -1,4 +1,5 @@
 import React from "react";
+import { Navigate } from "react-router-dom";
 
 class SalesForm extends React.Component {
   constructor(props) {
@@ -11,6 +12,8 @@ class SalesForm extends React.Component {
       salesPersons: [],
       autos: [],
       customers: [],
+      hasSubmitted: false,
+      navigate: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -64,6 +67,8 @@ class SalesForm extends React.Component {
     delete data.salesPerson;
     delete data.customers;
     delete data.autos;
+    delete data.hasSubmitted;
+    delete data.navigate;
 
     const salesHistoryUrl = "http://localhost:8090/api/sales/";
     const fetchConfig = {
@@ -81,8 +86,10 @@ class SalesForm extends React.Component {
         automobile: "",
         customer: "",
         price: "",
+        hasSubmitted: true,
       };
       this.setState(cleared);
+      setTimeout(() => this.setState({ navigate: true }), 15000);
     }
   }
 
@@ -93,12 +100,32 @@ class SalesForm extends React.Component {
   }
 
   render() {
+    let messageClasses = "alert alert-success d-none mb-3";
+    let rtMsg = "alert alert-secondary d-none mb-3";
+    let makeNew = "px-2 btn btn-primary d-none btn-lg active";
+    let formClasses = "";
+
+    if (this.state.hasSubmitted) {
+      messageClasses = "alert alert-success mb-3";
+      rtMsg = "alert alert-secondary mb-3";
+      formClasses = "d-none";
+      makeNew = "btn btn-primary btn-lg active mb-3";
+    }
+
+    if (this.state.navigate) {
+      return <Navigate to="/sales/list" />;
+    }
+
     return (
       <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
             <h1>Record a new sale</h1>
-            <form onSubmit={this.handleSubmit} id="create-sales-form">
+            <form
+              onSubmit={this.handleSubmit}
+              className={formClasses}
+              id="create-sales-form"
+            >
               <div className="mb-3">
                 <select
                   onChange={this.handleChange}
@@ -173,6 +200,22 @@ class SalesForm extends React.Component {
               </div>
               <button className="btn btn-primary">Create</button>
             </form>
+            <div className={messageClasses} id="success-message">
+              You've submitted a sales record!
+            </div>
+            <div className="d-flex justify-content-center">
+              <a
+                href="/sales"
+                className={makeNew}
+                role="button"
+                aria-pressed="true"
+              >
+                Add Another Record
+              </a>
+            </div>
+            <div className={rtMsg}>
+              Redirect to sales list in ___ seconds...
+            </div>
           </div>
         </div>
       </div>
