@@ -30,9 +30,9 @@ function AppointmentHistory() {
   return (
     <>
       <form className="form-inline">
-        <div className="p-3 input-group">
+        <div className="input-group p-2">
           <input
-            className="form-control mr-sm-2 "
+            className="form-control mr-sm-2 pr-3"
             type="search"
             placeholder="Search vins"
             onChange={(event) => setSearch(event.target.value)}
@@ -48,8 +48,7 @@ function AppointmentHistory() {
           </div>
         </div>
       </form>
-
-      <table className="table table-striped table-hover">
+      <table className="table table-striped">
         <thead>
           <tr>
             <th>Customer</th>
