@@ -7,9 +7,9 @@ function MainPage() {
           The premiere solution for interdimensional dealership management!
           <div>
             <img
-              src="https://media.cdn.adultswim.com/uploads/20210914/219141616186-1910281358343-RAM.jpg"
-              alt="car"
-              height="110"
+              src="https://c.tenor.com/fQTxeSCUYSsAAAAi/morty-die.gif"
+              alt="jason put this here"
+              height="400"
             />
           </div>
         </p>
