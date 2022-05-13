@@ -75,7 +75,7 @@ class SalesForm extends React.Component {
     };
     const response = await fetch(salesHistoryUrl, fetchConfig);
     if (response.ok) {
-      const newName = await response.json();
+      const newSales = await response.json();
       const cleared = {
         salesPerson: "",
         automobile: "",
