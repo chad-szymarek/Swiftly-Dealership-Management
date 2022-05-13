@@ -5,8 +5,12 @@ function TechnicianForm() {
     name: "",
     employee_number: "",
   });
+  const [successfulSubmit, setSuccessfulSubmit] = useState(false);
 
-  const handleSubmit = async (event) => {
+  let formClasses = "";
+  let alertClasses = "alert alert-success d-none mb-0";
+
+  const handleSubmit = async event => {
     event.preventDefault();
     const data = state;
 
@@ -25,10 +29,11 @@ function TechnicianForm() {
         name: "",
         employee_number: "",
       });
+      setSuccessfulSubmit(true);
     }
   };
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     const value = event.target.value;
     setState({
       ...state,
@@ -36,38 +41,50 @@ function TechnicianForm() {
     });
   };
 
+  if (successfulSubmit) {
+    formClasses = "d-none";
+    alertClasses = "alert alert-success mb-0";
+  }
+
   return (
-    <div className="row">
-      <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
+    <div className='row'>
+      <div className='offset-3 col-6'>
+        <div className='shadow p-4 mt-4'>
           <h1>Create a new technician</h1>
-          <form onSubmit={handleSubmit} id="create-technician-form">
-            <div className="form-floating mb-3">
+          <form
+            onSubmit={handleSubmit}
+            id='create-technician-form'
+            className={formClasses}
+          >
+            <div className='form-floating mb-3'>
               <input
                 onChange={handleChange}
                 value={state.name}
-                placeholder="Technician Name"
+                placeholder='Technician Name'
                 required
-                name="name"
-                id="technician_name"
-                className="form-control"
+                name='name'
+                id='technician_name'
+                className='form-control'
               />
-              <label htmlFor="style_name">Name</label>
+              <label htmlFor='style_name'>Name</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className='form-floating mb-3'>
               <input
                 onChange={handleChange}
                 value={state.employee_number}
-                placeholder="Employee Number"
+                placeholder='Employee Number'
                 required
-                name="employee_number"
-                id="employee_number"
-                className="form-control"
+                name='employee_number'
+                id='employee_number'
+                className='form-control'
               />
-              <label htmlFor="color">Employee Numbver</label>
+              <label htmlFor='color'>Employee Numbver</label>
             </div>
-            <button className="btn btn-primary">Create</button>
+            <button className='btn btn-primary'>Create</button>
           </form>
+          <div className={alertClasses} id='success-message'>
+            Technician created successfully
+          </div>
         </div>
       </div>
     </div>

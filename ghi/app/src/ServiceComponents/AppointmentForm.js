@@ -10,6 +10,11 @@ function AppointmentForm() {
     reason: "",
   });
   const [technicians, setTechnicians] = useState([]);
+  const [successfulSubmit, setSuccessfulSubmit] = useState(false);
+
+  let formClasses = "";
+  let alertClasses = "alert alert-success d-none mb-0";
+  let alertContainerClasses = "d-none";
 
   useEffect(() => {
     const fetchTechnicianData = async () => {
@@ -23,7 +28,7 @@ function AppointmentForm() {
     fetchTechnicianData();
   }, []);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
     const appointmentUrl = "http://localhost:8080/api/appointments/";
@@ -45,10 +50,11 @@ function AppointmentForm() {
         technician: "",
         reason: "",
       });
+      setSuccessfulSubmit(true);
     }
   };
 
-  const handleChange = (event) => {
+  const handleChange = event => {
     const value = event.target.value;
     setState({
       ...state,
@@ -56,73 +62,83 @@ function AppointmentForm() {
     });
   };
 
+  if (successfulSubmit) {
+    formClasses = "d-none";
+    alertClasses = "alert alert-success mb-3";
+    alertContainerClasses = "";
+  }
+
   return (
-    <div className="row">
-      <div className="offset-3 col-6">
-        <div className="shadow p-4 mt-4">
+    <div className='row'>
+      <div className='offset-3 col-6'>
+        <div className='shadow p-4 mt-4'>
           <h1>Create a new appointment</h1>
-          <form onSubmit={handleSubmit} id="create-appointment-form">
-            <div className="form-floating mb-3">
+          <form
+            onSubmit={handleSubmit}
+            id='create-appointment-form'
+            className={formClasses}
+          >
+            <div className='form-floating mb-3'>
               <input
                 onChange={handleChange}
                 value={state.customer_name}
-                placeholder="Customer Name"
+                placeholder='Customer Name'
                 required
-                name="customer_name"
-                id="name"
-                className="form-control"
+                name='customer_name'
+                id='name'
+                className='form-control'
               />
-              <label htmlFor="customer_name">Name</label>
+              <label htmlFor='customer_name'>Name</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className='form-floating mb-3'>
               <input
                 onChange={handleChange}
                 value={state.vin}
-                placeholder="vin"
+                placeholder='vin'
                 required
-                name="vin"
-                id="vin"
-                className="form-control"
+                name='vin'
+                id='vin'
+                className='form-control'
               />
-              <label htmlFor="vin">Vin Number</label>
+              <label htmlFor='vin'>Vin Number</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className='form-floating mb-3'>
               <input
-                type="date"
+                type='date'
                 onChange={handleChange}
                 value={state.date}
-                placeholder="date"
+                placeholder='date'
                 required
-                name="date"
-                id="date"
-                className="form-control"
+                name='date'
+                id='date'
+                className='form-control'
               />
-              <label htmlFor="date">Date</label>
+              <label htmlFor='date'>Date</label>
             </div>
-            <div className="form-floating mb-3">
+            <div className='form-floating mb-3'>
               <input
-                type="time"
+                type='time'
                 onChange={handleChange}
                 value={state.time}
-                placeholder="time"
+                placeholder='time'
                 required
-                name="time"
-                id="time"
-                className="form-control"
+                name='time'
+                id='time'
+                className='form-control'
               />
-              <label htmlFor="time">Time</label>
+              <label htmlFor='time'>Time</label>
             </div>
-            <div className="mb-3">
+            <div className='mb-3'>
               <select
                 onChange={handleChange}
                 value={state.technician}
                 required
-                name="technician"
-                id="technician"
-                className="form-select"
+                name='technician'
+                id='technician'
+                className='form-select'
               >
-                <option value="">Choose a technician</option>
-                {technicians.map((technician) => {
+                <option value=''>Choose a technician</option>
+                {technicians.map(technician => {
                   return (
                     <option
                       key={technician.employee_number}
@@ -134,21 +150,32 @@ function AppointmentForm() {
                 })}
               </select>
             </div>
-            <label htmlFor="technician">Technician</label>
-            <div className="form-floating mb-3">
+            <label htmlFor='technician'>Technician</label>
+            <div className='form-floating mb-3'>
               <input
                 onChange={handleChange}
                 value={state.reason}
-                placeholder="reason"
+                placeholder='reason'
                 required
-                name="reason"
-                id="reason"
-                className="form-control"
+                name='reason'
+                id='reason'
+                className='form-control'
               />
-              <label htmlFor="reason">Reason</label>
+              <label htmlFor='reason'>Reason</label>
             </div>
-            <button className="btn btn-primary">Create</button>
+            <button className='btn btn-primary'>Create</button>
           </form>
+          <div className={alertContainerClasses}>
+            <div className={alertClasses} id='success-message'>
+              Appointment created successfully
+            </div>
+            <button
+              onClick={() => setSuccessfulSubmit(false)}
+              className='btn btn-primary'
+            >
+              Create another Appointment
+            </button>
+          </div>
         </div>
       </div>
     </div>
