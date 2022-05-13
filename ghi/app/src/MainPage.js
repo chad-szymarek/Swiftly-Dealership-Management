@@ -5,14 +5,14 @@ function MainPage() {
       <div className="col-lg-6 mx-auto">
         <p className="lead mb-4">
           The premiere solution for interdimensional dealership management!
-          <div>
-            <img
-              src="https://c.tenor.com/fQTxeSCUYSsAAAAi/morty-die.gif"
-              alt="jason put this here"
-              height="400"
-            />
-          </div>
         </p>
+        <div>
+          <img
+            src="https://c.tenor.com/fQTxeSCUYSsAAAAi/morty-die.gif"
+            alt="jason put this here"
+            height="400"
+          />
+        </div>
       </div>
     </div>
   );
