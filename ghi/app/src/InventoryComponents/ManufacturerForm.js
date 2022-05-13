@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function ManufacturerForm() {
   const [state, setState] = useState({
@@ -72,12 +73,19 @@ function ManufacturerForm() {
             <div className={alertClasses} id='success-message'>
               Manufacturer created successfully
             </div>
-            <button
-              onClick={() => setSuccessfulSubmit(false)}
-              className='btn btn-primary'
-            >
-              Create another Manufacturer
-            </button>
+            <div className='d-flex justify-content-between'>
+              <button
+                onClick={() => setSuccessfulSubmit(false)}
+                className='btn btn-primary'
+              >
+                Create another Manufacturer
+              </button>
+              <Link to='/manufacturers/'>
+                <button className='btn btn-primary float-right'>
+                  Manufacturer List
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
