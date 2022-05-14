@@ -8,7 +8,8 @@ function TechnicianForm() {
   const [successfulSubmit, setSuccessfulSubmit] = useState(false);
 
   let formClasses = "";
-  let alertClasses = "alert alert-success d-none mb-0";
+  let alertClasses = "alert alert-success d-none mb-3";
+  let alertContainerClasses = "d-none";
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -43,7 +44,8 @@ function TechnicianForm() {
 
   if (successfulSubmit) {
     formClasses = "d-none";
-    alertClasses = "alert alert-success mb-0";
+    alertClasses = "alert alert-success mb-3";
+    alertContainerClasses = "";
   }
 
   return (
@@ -82,8 +84,16 @@ function TechnicianForm() {
             </div>
             <button className='btn btn-primary'>Create</button>
           </form>
-          <div className={alertClasses} id='success-message'>
-            Technician created successfully
+          <div className={alertContainerClasses}>
+            <div className={alertClasses} id='success-message'>
+              Technician created successfully
+            </div>
+            <button
+              onClick={() => setSuccessfulSubmit(false)}
+              className='btn btn-primary'
+            >
+              Create another Technician
+            </button>
           </div>
         </div>
       </div>

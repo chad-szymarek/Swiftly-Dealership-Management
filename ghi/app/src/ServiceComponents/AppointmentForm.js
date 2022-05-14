@@ -13,7 +13,7 @@ function AppointmentForm() {
   const [successfulSubmit, setSuccessfulSubmit] = useState(false);
 
   let formClasses = "";
-  let alertClasses = "alert alert-success d-none mb-0";
+  let alertClasses = "alert alert-success d-none mb-3";
   let alertContainerClasses = "d-none";
 
   useEffect(() => {
