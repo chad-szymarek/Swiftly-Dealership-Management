@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 function Timer({ count }) {
   const [counter, setCounter] = useState(count);
@@ -7,7 +7,7 @@ function Timer({ count }) {
     counter > 0 && setTimeout(() => setCounter(counter - 1), 1000);
   }, [counter]);
 
-  return <div>{counter}</div>;
+  return counter;
 }
 
 export default Timer;

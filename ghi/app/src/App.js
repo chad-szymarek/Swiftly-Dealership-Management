@@ -40,20 +40,20 @@ function App(props) {
           </Route>
           <Route path="automobiles">
             <Route index element={<AutomobileList />} />
-            <Route path="create/" element={<AutomobileForm />} />
+            <Route path="create" element={<AutomobileForm />} />
           </Route>
           <Route path="vehicles">
             <Route index element={<VehicleList />} />
-            <Route path="create/" element={<VehicleForm />} />
+            <Route path="create" element={<VehicleForm />} />
           </Route>
-          <Route path="/salesperson">
+          <Route path="salesperson">
             <Route index element={<SalespersonForm />} />
           </Route>
-          <Route path="/customer">
-            <Route index element={<CustomerForm />} />
+          <Route path="customer">
+            <Route path="" element={<CustomerForm />} />
           </Route>
-          <Route path="/sales">
-            <Route index element={<SalesForm />} />
+          <Route path="sales">
+            <Route path="" element={<SalesForm />} />
             <Route
               path="list"
               element={<SalesList salespersons={props.salespersons} />}

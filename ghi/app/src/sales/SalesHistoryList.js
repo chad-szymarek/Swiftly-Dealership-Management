@@ -1,16 +1,28 @@
 import React, { useEffect, useState } from "react";
 
 function SalesHistoryList(props) {
-  const salespersons = props.salespersons;
+  const [salespersons, setSalesPersons] = useState([]);
   const [salesRecord, setSalesRecord] = useState();
-  const [salesData, setSalesData] = useState(salespersons);
-
+  const [salesData, setSalesData] = useState([]);
+  console.log("salesData:", salesData);
   const handleChange = (event) => {
     setSalesRecord(event.target.value);
   };
 
   useEffect(() => {
-    const GetSalesData = () => {
+    const getSalesData = async () => {
+      const salesRecordResponse = await fetch(
+        "http://localhost:8090/api/sales/"
+      );
+      const salespersonsdata = await salesRecordResponse.json();
+      setSalesPersons(salespersonsdata.sales);
+      setSalesData(salespersonsdata.sales);
+    };
+    getSalesData();
+  }, []);
+
+  useEffect(() => {
+    const getSalesData = () => {
       if (!salesRecord) {
         setSalesData(salespersons);
         return;
@@ -22,7 +34,7 @@ function SalesHistoryList(props) {
       });
       setSalesData(salesPersonData);
     };
-    GetSalesData();
+    getSalesData();
   }, [salesRecord, salespersons]);
 
   return (

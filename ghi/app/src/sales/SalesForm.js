@@ -1,5 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import Timer from "../UtilityComponents/Timer";
 
 class SalesForm extends React.Component {
   constructor(props) {
@@ -104,12 +105,14 @@ class SalesForm extends React.Component {
     let rtMsg = "alert alert-secondary d-none mb-3";
     let makeNew = "px-2 btn btn-primary d-none btn-lg active";
     let formClasses = "";
+    let countDown = "";
 
     if (this.state.hasSubmitted) {
       messageClasses = "alert alert-success mb-3";
       rtMsg = "alert alert-secondary mb-3";
       formClasses = "d-none";
       makeNew = "btn btn-primary btn-lg active mb-3";
+      countDown = <Timer count={10} />;
     }
 
     if (this.state.navigate) {
@@ -214,7 +217,7 @@ class SalesForm extends React.Component {
               </a>
             </div>
             <div className={rtMsg}>
-              Redirect to sales list in ___ seconds...
+              Redirect to sales list in {countDown} seconds...
             </div>
           </div>
         </div>
