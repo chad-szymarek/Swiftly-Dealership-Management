@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import MainPage from "./MainPage";
 import Nav from "./Nav";
+
 import AppointmentList from "./ServiceComponents/AppointmentList";
 import TechnicianForm from "./ServiceComponents/TechnicianForm";
 import AppointmentForm from "./ServiceComponents/AppointmentForm";
@@ -18,48 +20,49 @@ import CustomerForm from "./sales/CustomerForm";
 import SalesForm from "./sales/SalesForm";
 import SalesList from "./sales/SalesList";
 import SalesHistoryList from "./sales/SalesHistoryList";
+import "./App.css";
 
 function App(props) {
   return (
     <BrowserRouter>
       <Nav />
-      <div className="container">
+      <div className='container'>
         <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="appointments">
+          <Route path='/' element={<MainPage />} />
+          <Route path='appointments'>
             <Route index element={<AppointmentList />} />
-            <Route path="create/" element={<AppointmentForm />} />
-            <Route path="history/" element={<AppointmentHistory />} />
+            <Route path='create/' element={<AppointmentForm />} />
+            <Route path='history/' element={<AppointmentHistory />} />
           </Route>
-          <Route path="technicians">
+          <Route path='technicians'>
             <Route index element={<TechnicianForm />} />
           </Route>
-          <Route path="manufacturers">
+          <Route path='manufacturers'>
             <Route index element={<ManufacturerList />} />
-            <Route path="create/" element={<ManufacturerForm />} />
+            <Route path='create/' element={<ManufacturerForm />} />
           </Route>
-          <Route path="automobiles">
+          <Route path='automobiles'>
             <Route index element={<AutomobileList />} />
-            <Route path="create" element={<AutomobileForm />} />
+            <Route path='create' element={<AutomobileForm />} />
           </Route>
-          <Route path="vehicles">
+          <Route path='vehicles'>
             <Route index element={<VehicleList />} />
-            <Route path="create" element={<VehicleForm />} />
+            <Route path='create' element={<VehicleForm />} />
           </Route>
-          <Route path="salesperson">
+          <Route path='salesperson'>
             <Route index element={<SalespersonForm />} />
           </Route>
-          <Route path="customer">
-            <Route path="" element={<CustomerForm />} />
+          <Route path='customer'>
+            <Route path='' element={<CustomerForm />} />
           </Route>
-          <Route path="sales">
-            <Route path="" element={<SalesForm />} />
+          <Route path='sales'>
+            <Route path='' element={<SalesForm />} />
             <Route
-              path="list"
+              path='list'
               element={<SalesList salespersons={props.salespersons} />}
             />
             <Route
-              path="history"
+              path='history'
               element={
                 <SalesHistoryList
                   salespersons={props.salespersons}
