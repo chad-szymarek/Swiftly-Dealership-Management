@@ -1,4 +1,22 @@
-# CarCar
+# Schwifty Dealership Management
+
+## Things to add
+
+### Entire Site
+
+- Dark Mode/Light Mode toggle
+- Possibly authentication
+
+### Services
+
+- List of technicians with the ability to delete them
+- If a technician is deleted, you should be able to reassign a technician to their appointments
+
+### Sales
+
+- List of sales people with the ability to delete them
+
+### Inventory
 
 Team:
 
