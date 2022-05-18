@@ -1,41 +1,49 @@
 import React, { useEffect, useState } from "react";
 
-function SalesHistoryList(props) {
-  const [salespersons, setSalesPersons] = useState([]);
-  const [salesRecord, setSalesRecord] = useState();
-  const [salesData, setSalesData] = useState([]);
-  console.log("salesData:", salesData);
-  const handleChange = (event) => {
-    setSalesRecord(event.target.value);
-  };
+function SalesHistoryList() {
+  const [salesPersons, setSalesPersons] = useState([]);
+  const [salesPerson, setSalesPerson] = useState([]);
+  const [salesRecord, setSalesRecord] = useState([]);
+  const [filteredSales, setFilteredSales] = useState([]);
 
   useEffect(() => {
-    const getSalesData = async () => {
+    const getSalesPersonsData = async () => {
+      const salesPersonsResponse = await fetch(
+        "http://localhost:8090/api/salespersons/"
+      );
+      const salesPersonsData = await salesPersonsResponse.json();
+      setSalesPersons(salesPersonsData.salespersons);
+    };
+    getSalesPersonsData();
+  }, []);
+
+  useEffect(() => {
+    const getSalesRecordData = async () => {
       const salesRecordResponse = await fetch(
         "http://localhost:8090/api/sales/"
       );
-      const salespersonsdata = await salesRecordResponse.json();
-      setSalesPersons(salespersonsdata.sales);
-      setSalesData(salespersonsdata.sales);
+      const salesRecordData = await salesRecordResponse.json();
+      setSalesRecord(salesRecordData.sales);
     };
-    getSalesData();
+    getSalesRecordData();
   }, []);
 
   useEffect(() => {
     const getSalesData = () => {
       if (!salesRecord) {
-        setSalesData(salespersons);
         return;
       }
-
-      const salesPersonData = salespersons.filter((salesperson) => {
-        const salesperson1 = salesperson.sales_person.emp_no;
-        return salesperson1 === Number(salesRecord);
-      });
-      setSalesData(salesPersonData);
+      const salesRecordData = salesRecord.filter(
+        (sale) => sale.employee_no === Number(salesPerson)
+      );
+      setFilteredSales(salesRecordData);
     };
     getSalesData();
-  }, [salesRecord, salespersons]);
+  }, [salesRecord, salesPerson]);
+
+  const handleChange = (event) => {
+    setSalesPerson(event.target.value);
+  };
 
   return (
     <>
@@ -49,13 +57,13 @@ function SalesHistoryList(props) {
         aria-label="Default select example"
       >
         <option>Select a Salesperson</option>
-        {props.salesreps.map((salesrep) => {
+        {salesPersons.map((salesperson) => {
           return (
             <option
-              key={salesrep.employee_number}
-              value={salesrep.employee_number}
+              key={salesperson.employee_number}
+              value={salesperson.employee_number}
             >
-              {salesrep.name}
+              {salesperson.name}
             </option>
           );
         })}
@@ -70,13 +78,13 @@ function SalesHistoryList(props) {
           </tr>
         </thead>
         <tbody>
-          {salesData.map((salesperson) => {
+          {filteredSales.map((sale) => {
             return (
-              <tr key={salesperson.automobile}>
-                <td>{salesperson.sales_person.name}</td>
-                <td>{salesperson.customer}</td>
-                <td>{salesperson.automobile}</td>
-                <td>${salesperson.price}</td>
+              <tr key={sale.automobile}>
+                <td>{sale.sales_person}</td>
+                <td>{sale.customer}</td>
+                <td>{sale.automobile}</td>
+                <td>${sale.price}</td>
               </tr>
             );
           })}
