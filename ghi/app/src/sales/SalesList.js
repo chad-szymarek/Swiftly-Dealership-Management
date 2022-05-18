@@ -34,8 +34,8 @@ class SalesList extends React.Component {
             {this.state.sales.map((salesperson) => {
               return (
                 <tr key={salesperson.automobile}>
-                  <td>{salesperson.sales_person.name}</td>
-                  <td>{salesperson.sales_person.emp_no}</td>
+                  <td>{salesperson.sales_person}</td>
+                  <td>{salesperson.employee_no}</td>
                   <td>{salesperson.customer}</td>
                   <td>{salesperson.automobile}</td>
                   <td>${salesperson.price}</td>
