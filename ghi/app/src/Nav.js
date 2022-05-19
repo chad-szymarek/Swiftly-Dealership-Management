@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import Switch from "./UtilityComponents/Switch";
 
-function Nav() {
+function Nav({ darkTheme, onThemeChange }) {
   return (
     <nav className='navbar navbar-expand-lg navbar-dark bg-success'>
       <div className='container-fluid' id='work'>
@@ -103,7 +103,9 @@ function Nav() {
             <li className='nav-item'></li>
           </ul>
         </div>
-        <Switch />
+        <i class='fa-solid fa-sun'></i>
+        <Switch toggled={darkTheme} onToggled={onThemeChange} />
+        <i class='fa-solid fa-moon'></i>
       </div>
     </nav>
   );

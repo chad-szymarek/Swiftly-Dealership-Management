@@ -49,7 +49,7 @@ function AppointmentList() {
 
   return (
     <>
-      <table className='table table-striped table-hover'>
+      <table className='table table-striped'>
         <thead>
           <tr>
             <th>Customer</th>

@@ -22,10 +22,18 @@ import SalesForm from "./sales/SalesForm";
 import SalesList from "./sales/SalesList";
 import SalesHistoryList from "./sales/SalesHistoryList";
 
+import "./App.css";
+
 function App(props) {
+  const [darkTheme, setDarkTheme] = useState(true);
+
+  const handleThemeChange = () => {
+    setDarkTheme(!darkTheme);
+  };
+
   return (
-    <BrowserRouter>
-      <Nav />
+    <div id='App' className={darkTheme ? "dark-mode" : "light-mode"}>
+      <Nav darkTheme={darkTheme} onThemeChange={handleThemeChange} />
       <Routes>
         <Route path='/' element={<MainPage />} />
         <Route path='appointments'>
@@ -71,7 +79,7 @@ function App(props) {
           />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </div>
   );
 }
 
