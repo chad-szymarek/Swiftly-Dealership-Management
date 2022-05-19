@@ -103,9 +103,9 @@ function Nav({ darkTheme, onThemeChange }) {
             <li className='nav-item'></li>
           </ul>
         </div>
-        <i class='fa-solid fa-sun'></i>
+        <i className='fa-solid fa-sun'></i>
         <Switch toggled={darkTheme} onToggled={onThemeChange} />
-        <i class='fa-solid fa-moon'></i>
+        <i className='fa-solid fa-moon'></i>
       </div>
     </nav>
   );
