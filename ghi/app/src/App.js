@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import MainPage from "./MainPage";
 import Nav from "./Nav";
@@ -25,11 +25,20 @@ import SalesHistoryList from "./sales/SalesHistoryList";
 import "./App.css";
 
 function App(props) {
-  const [darkTheme, setDarkTheme] = useState(true);
+  const [darkTheme, setDarkTheme] = useState(() => {
+    const saved = localStorage.getItem("darkTheme");
+    const initialValue = JSON.parse(saved);
+    console.log(initialValue);
+    return initialValue === null ? true : initialValue;
+  });
 
   const handleThemeChange = () => {
     setDarkTheme(!darkTheme);
   };
+
+  useEffect(() => {
+    localStorage.setItem("darkTheme", JSON.stringify(darkTheme));
+  }, [darkTheme]);
 
   return (
     <div id='App' className={darkTheme ? "dark-mode" : "light-mode"}>
