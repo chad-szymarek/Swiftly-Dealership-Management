@@ -150,7 +150,6 @@ function AppointmentForm() {
                 })}
               </select>
             </div>
-            <label htmlFor='technician'>Technician</label>
             <div className='form-floating mb-3'>
               <input
                 onChange={handleChange}

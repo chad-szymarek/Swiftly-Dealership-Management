@@ -18,16 +18,16 @@ function CustomerList() {
   return (
     <>
       <h1>Customer List</h1>
-      <table className="table table-striped">
+      <table className='table table-striped'>
         <thead>
           <tr>
             <th>Name</th>
             <th>Address</th>
-            <th>Picture</th>
+            <th>Phone Number</th>
           </tr>
         </thead>
         <tbody>
-          {customers.map((customer) => {
+          {customers.map(customer => {
             return (
               <tr key={customer.id}>
                 <td>{customer.name}</td>

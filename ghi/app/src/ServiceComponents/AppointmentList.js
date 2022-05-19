@@ -76,6 +76,7 @@ function AppointmentList() {
                   <td>{appointment.reason}</td>
                   <td>
                     <button
+                      className='btn btn-danger'
                       onClick={async () => {
                         await deleteAppointment(appointment.id);
                         await fetchAppointmentData();

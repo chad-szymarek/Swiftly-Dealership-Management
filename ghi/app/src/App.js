@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 import MainPage from "./MainPage";
 import Nav from "./Nav";
@@ -26,7 +26,7 @@ import SalesHistoryList from "./sales/SalesHistoryList";
 
 import "./App.css";
 
-function App(props) {
+function App() {
   const [darkTheme, setDarkTheme] = useState(() => {
     const saved = localStorage.getItem("darkTheme");
     const initialValue = JSON.parse(saved);
@@ -43,42 +43,42 @@ function App(props) {
   }, [darkTheme]);
 
   return (
-    <div id="App" className={darkTheme ? "dark-mode" : "light-mode"}>
+    <div id='App' className={darkTheme ? "dark-mode" : "light-mode"}>
       <Nav darkTheme={darkTheme} onThemeChange={handleThemeChange} />
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="appointments">
+        <Route path='/' element={<MainPage />} />
+        <Route path='appointments'>
           <Route index element={<AppointmentList />} />
-          <Route path="create/" element={<AppointmentForm />} />
-          <Route path="history/" element={<AppointmentHistory />} />
+          <Route path='create/' element={<AppointmentForm />} />
+          <Route path='history/' element={<AppointmentHistory />} />
         </Route>
-        <Route path="technicians">
+        <Route path='technicians'>
           <Route index element={<TechnicianForm />} />
         </Route>
-        <Route path="manufacturers">
+        <Route path='manufacturers'>
           <Route index element={<ManufacturerList />} />
-          <Route path="create/" element={<ManufacturerForm />} />
+          <Route path='create/' element={<ManufacturerForm />} />
         </Route>
-        <Route path="automobiles">
+        <Route path='automobiles'>
           <Route index element={<AutomobileList />} />
-          <Route path="create" element={<AutomobileForm />} />
+          <Route path='create' element={<AutomobileForm />} />
         </Route>
-        <Route path="vehicles">
+        <Route path='vehicles'>
           <Route index element={<VehicleList />} />
-          <Route path="create" element={<VehicleForm />} />
+          <Route path='create' element={<VehicleForm />} />
         </Route>
-        <Route path="salesperson">
+        <Route path='salesperson'>
           <Route index element={<SalespersonForm />} />
-          <Route path="list" element={<SalespersonList />} />
+          <Route path='list' element={<SalespersonList />} />
         </Route>
-        <Route path="customer">
-          <Route path="" element={<CustomerForm />} />
-          <Route path="list" element={<CustomerList />} />
+        <Route path='customer'>
+          <Route path='' element={<CustomerForm />} />
+          <Route path='list' element={<CustomerList />} />
         </Route>
-        <Route path="sales">
-          <Route path="" element={<SalesForm />} />
-          <Route path="list" element={<SalesList />} />
-          <Route path="history" element={<SalesHistoryList />} />
+        <Route path='sales'>
+          <Route path='' element={<SalesForm />} />
+          <Route path='list' element={<SalesList />} />
+          <Route path='history' element={<SalesHistoryList />} />
         </Route>
       </Routes>
     </div>
@@ -86,4 +86,3 @@ function App(props) {
 }
 
 export default App;
-//Schifty
