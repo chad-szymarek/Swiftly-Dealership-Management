@@ -6,6 +6,7 @@ class SalespersonForm extends React.Component {
     this.state = {
       name: "",
       employeeNumber: "",
+      hasSubmitted: false,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -16,6 +17,7 @@ class SalespersonForm extends React.Component {
     event.preventDefault();
     const data = { ...this.state };
     data.employee_number = data.employeeNumber;
+    delete data.hasSubmitted;
     delete data.employeeNumber;
 
     const nameUrl = "http://localhost:8090/api/salespersons/";
@@ -28,10 +30,10 @@ class SalespersonForm extends React.Component {
     };
     const response = await fetch(nameUrl, fetchConfig);
     if (response.ok) {
-      const newName = await response.json();
       const cleared = {
         name: "",
         employeeNumber: "",
+        hasSubmitted: true,
       };
       this.setState(cleared);
     }
@@ -44,12 +46,26 @@ class SalespersonForm extends React.Component {
   }
 
   render() {
+    let messageClasses = "alert alert-success d-none mb-3";
+    let makeNew = "d-none";
+    let formClasses = "";
+
+    if (this.state.hasSubmitted) {
+      formClasses = "d-none";
+      messageClasses = "alert alert-success mb-3";
+      makeNew = "btn btn-primary btn-sm active mb-3";
+    }
+
     return (
       <div className="row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
             <h1>Add a Salesperson</h1>
-            <form onSubmit={this.handleSubmit} id="create-salesperson-form">
+            <form
+              onSubmit={this.handleSubmit}
+              className={formClasses}
+              id="create-salesperson-form"
+            >
               <div className="form-floating mb-3">
                 <input
                   onChange={this.handleChange}
@@ -78,6 +94,17 @@ class SalespersonForm extends React.Component {
               </div>
               <button className="btn btn-primary">Create</button>
             </form>
+            <div className={messageClasses} id="success-message">
+              You've added a salesperson!
+            </div>
+            <div className="d-flex justify-content-around">
+              <a href="/salesperson" className={makeNew}>
+                Add Another Salesperson
+              </a>
+              <a href="/salesperson/list" className={makeNew}>
+                Go to Salesperson List
+              </a>
+            </div>
           </div>
         </div>
       </div>

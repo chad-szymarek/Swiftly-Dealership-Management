@@ -83,8 +83,14 @@ function Nav() {
             <NavLink className="dropdown-item" to="/salesperson">
               New Salesperson
             </NavLink>
+            <NavLink className="dropdown-item" to="/salesperson/list">
+              Salesperson List
+            </NavLink>
             <NavLink className="dropdown-item" to="/customer">
               New Customer
+            </NavLink>
+            <NavLink className="dropdown-item" to="/customer/list">
+              Customer List
             </NavLink>
             <NavLink className="dropdown-item" to="/sales">
               New Sales Record
