@@ -12,12 +12,19 @@ table.table {
   background-color: rgb(56, 55, 55);
   color: white;
 }
+.dark-mode .shadow {
+  background-color: rgb(51, 51, 51);
+}
 .icon {
   width: 16px;
   height: 16px;
 }
 .icon-account-login {
   fill: #f00;
+}
+
+label {
+  color: black;
 }
 body {
   margin: 0;
