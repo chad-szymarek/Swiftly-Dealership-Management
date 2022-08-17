@@ -6,7 +6,7 @@ function Nav({ darkTheme, onThemeChange }) {
     <nav className="navbar navbar-expand-lg navbar-dark bg-success">
       <div className="container-fluid" id="work">
         <NavLink className="navbar-brand" to="/">
-          Drive Schwifty
+          Drive Swiftly
         </NavLink>
         <div className="p-2 dropdown">
           <NavLink
