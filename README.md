@@ -1,27 +1,9 @@
 # Schwifty Dealership Management
 
-## Things to add
-
-### Entire Site
-
-- Dark Mode/Light Mode toggle
-- Possibly authentication
-
-### Services
-
-- List of technicians with the ability to delete them
-- If a technician is deleted, you should be able to reassign a technician to their appointments
-
-### Sales
-
-- List of sales people with the ability to delete them
-
-### Inventory
-
 Team:
 
-- Person 1 - Chad - Services
-- Person 2 - Jason - Sales
+- Chad - Services Microservice
+- Jason - Sales Microservice
 
 ## Design
 
@@ -63,3 +45,34 @@ In order to grab that data, I will be using polling, to poll the Inventory datab
 ## Sales microservice
 
 The sales microservice records a salesperson's automobile sales, tracking the movement of what is in the vehicle inventory. The models required will be a Salesperson, Customer, and a Sales record. The Sales record model will poll for for data in the microservice to pull data from the main inventory application.
+
+## Building and running the project
+First, make sure you have Docker installed on your machine.
+[Docker Download](https://docs.docker.com/get-docker/)
+
+Start Docker on your machine.
+
+In your terminal, clone down the repository.  
+`git clone <clone url here>`
+
+CD into the directory that was made when you cloned down the repository.
+
+In your terminal, run this command to create a new volume that Docker can use for this project.
+`docker volume create beta-data`
+
+Now run this command to build a new Docker Container.
+`docker compose build`
+
+Finally run this command to bring the container that was just made up.
+`docker compose up`
+
+In your browser, navigate to `http://localhost:3000` to view the application.
+
+# Visuals of the site structure
+
+
+
+
+
+
+
