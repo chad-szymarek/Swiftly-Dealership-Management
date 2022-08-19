@@ -52,23 +52,60 @@ First, make sure you have Docker installed on your machine.
 
 Start Docker on your machine.
 
-In your terminal, clone down the repository.  
+In your terminal, clone down the repository.    
 `git clone <clone url here>`
 
-CD into the directory that was made when you cloned down the repository.
+CD into the directory that was made when you cloned down the repository.  
 
-In your terminal, run this command to create a new volume that Docker can use for this project.
+In your terminal, run this command to create a new volume that Docker can use for this project.  
 `docker volume create beta-data`
 
-Now run this command to build a new Docker Container.
+Now run this command to build a new Docker Container.  
 `docker compose build`
 
-Finally run this command to bring the container that was just made up.
+Finally run this command to bring the container that was just made up.  
 `docker compose up`
 
 In your browser, navigate to `http://localhost:3000` to view the application.
 
 # Visuals of the site structure
+## Homepage
+Homepage
+<br>
+<hr>
+<img src="./images/homepage.jpg" alt="homepage" width=450px>
+
+## Inventory
+This section of the site allows you to create automobiles, manufacturers and models. You can also see a list of all the automobiles, manufacturers, and models that are currently in the database.
+<br>
+<hr>
+<img src="./images/create-vehicle-model.jpg" alt="create model" width=450px>
+<img src="./images/create-automobile.jpg" alt="create automobile" width=450px>
+<img src="./images/create-manufacturer.jpg" alt="create manufacturer" width=450px>
+<img src="./images/create-manufacturer-after.jpg" alt="after successful manufacturer creation" width=450px>
+<img src="./images/show-vehicle-models.jpg" alt="show vechicle model" width=450px>
+<img src="./images/show-automobiles.jpg" alt="show automobiles" width=450px>
+<img src="./images/show-manufacturers.jpg" alt="show manufacturers" width=450px>
+
+## Services
+This part of the site allows you to add techicians to the staff and add appointments for customers, assign technicians to those appointments, finish an appointment, and see all the appointments a specific vehicle VIN number has had.
+<br>
+<hr>
+<img src="./images/create-appointment.jpg" alt="create appointment" width=450px>
+<img src="./images/create-technician.jpg" alt="create technician" width=450px>
+<img src="./images/show-appointments.jpg" alt="show appointments" width=450px>
+<img src="./images/show-appointment-history.jpg" alt="show appointment history" width=450px>
+
+## Sales
+The sales section of the site allows you to create new sales staff, see a list of all the sales staff, see a salesperson's sales history add in customers, see a list of customers, and create a sales record for a customer.
+
+<br>
+<hr>
+<img src="./images/customer-list.jpg" alt="customer list" width=450px>
+<img src="./images/salesperson-list.jpg" alt="salesperson list" width=450px>
+<img src="./images/new-sales-record.jpg" alt="new sales record" width=450px>
+<img src="./images/sales-person-history.jpg" alt="salesperson history" width=450px>
+
 
 
 
